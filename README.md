@@ -32,10 +32,10 @@ The element powers btw (as i remember them) are:
 * I want to make a digital version of an old folk game called Elements.
 * It's played with 4 different colors of pebbles (being earth, air, wind, and fire) on a chess board or a little larger.
 * It's a bit of a mix between Chess and Go -- each player has exactly one King that must avoid being captured, and the 4 different element stones have different special things they do when you place them.
-* Earth & Air powers are for MVP (not fire/water)
 * You draw a "hand" of stones which determines which colors you can play.
 * 2 players: both players are playing from the same computer.
 * highlight whoever's turn it is
+* Just Air powers are for MVP (not fire/water/earth) 
 
 //===================
 
@@ -48,7 +48,7 @@ The element powers btw (as i remember them) are:
 
 * And as stretch goals I can implement the more advanced rules for Element Stone movement / powers, plus more advanced CSS stuff if i get to it.
 
-* Fire & Water powers are stretch goals
+* Fire & Water & Earth powers are stretch goals
 
 * Stretch stretch stretch goal: play with someone over the internet!!
 
