@@ -1,12 +1,14 @@
 #board {
-    width: 50%;
-    height: 50vh;
+    width: 55vh;
+    height: 60vh;
     background-color: #f1f1f1;
     display: flex;
+    flex-wrap: wrap;
 }
 
 .square {
-    width: 10%;
-    height: 10%;
+    width: 9vh;
+    height: 9vh;
     border: solid 1px black;
+    margin: 5px 5px;
 }
