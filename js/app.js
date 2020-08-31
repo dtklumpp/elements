@@ -23,3 +23,10 @@ const clickSquare = function(event){
 
 $('.square').on('click', clickSquare);
 
+const piece1 = $('<div/>').addClass('piece');
+piece1.attr('piecetype', 'sage');
+const sage1 = {
+    icon: piece1
+};
+
+$('#play-area').append(sage1.icon);

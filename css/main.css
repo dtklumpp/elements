@@ -3,11 +3,12 @@ body {
 
 #play-area {
     display: flex;
+    position: relative;
 }
 
 #board {
     width: 55vh;
-    height: 60vh;
+    height: 52vh;
     background-color: #f1f1f1;
     display: flex;
     flex-wrap: wrap;
@@ -17,7 +18,7 @@ body {
     width: 9vh;
     height: 9vh;
     border: solid 1px black;
-    margin: 5px 5px;
+    margin: 0 5px;
 }
 
 #panel {
@@ -26,3 +27,18 @@ body {
     background-color: #00a100;
 }
 
+.piece {
+    width: 8vh;
+    height: 8vh;
+    background-color: black;
+    border-radius: 50%;
+    position: absolute;
+    top: 5px;
+    left: 10px;
+}
+
+#metric {
+    width: 420px;
+    height: 5vh;
+    background-color: #0000a1;
+}
