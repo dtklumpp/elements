@@ -35,6 +35,7 @@ The element powers btw (as i remember them) are:
 * Earth & Air powers are for MVP (not fire/water)
 * You draw a "hand" of stones which determines which colors you can play.
 * 2 players: both players are playing from the same computer.
+* highlight whoever's turn it is
 
 //===================
 
