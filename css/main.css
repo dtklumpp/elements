@@ -1,0 +1,12 @@
+#board {
+    width: 50%;
+    height: 50vh;
+    background-color: #f1f1f1;
+    display: flex;
+}
+
+.square {
+    width: 10%;
+    height: 10%;
+    border: solid 1px black;
+}
