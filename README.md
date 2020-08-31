@@ -17,7 +17,8 @@ Then each turn:
 * When a stone is placed, they also get to implement its element bonus, which usually involves creating or moving adjacent stones around on the board.  In some cases a stone can directly replace a different element stone.
 * Can users bid to go first?  I'll try to look this up...
 
-After each move, the game checks if somebody has won.
+After each move, the game checks if somebody has won.  This happens if the enemy King has no legal moves.
+
 If so, it implements the Congratulations function and transfers $X to the winning User's swiss bank account (and removes it from the loser's?--stretch goal)
 
 The element powers btw (as i remember them) are:
@@ -35,7 +36,8 @@ The element powers btw (as i remember them) are:
 * You draw a "hand" of stones which determines which colors you can play.
 * 2 players: both players are playing from the same computer.
 * highlight whoever's turn it is
-* Just Air powers are for MVP (not fire/water/earth) 
+* Just Air powers are for MVP (not fire/water/earth)
+* Implement check for Victory conditions (when opponent King has no legal move)
 
 //===================
 
