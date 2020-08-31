@@ -33,8 +33,10 @@ body {
     background-color: black;
     border-radius: 50%;
     position: absolute;
-    top: 325px;
-    left: 330px;
+    top: 5px;
+    left: 5px;
+    /* top: 325px; */
+    /* left: 330px; */
     border: solid 1px black;
     /* base is 5px 10px */
     /* over 1 is 10px => 90px */

@@ -1,5 +1,7 @@
 console.log('you are hearing me talk');
 
+//credits: got cool idea from liz re: 1s and 2s
+
 const fxn1 = function() {
     console.log('clicked button 1');
 }
@@ -11,6 +13,8 @@ for(i=0; i<5; i++){
         const newSquare = $('<div/>').addClass('square');
         newSquare.attr('x-coord', j);
         newSquare.attr('y-coord', i);
+        newSquare.css('position', 'relative');
+        newSquare.attr('id', j+5*i);
         board1.append(newSquare);
     }
 }
@@ -30,6 +34,9 @@ const sage1 = {
     icon: piece1
 };
 piece1.attr('base-color', 'black');
+//piece1.appendTo($('#24'));
+$('#24').append(piece1);
+
 
 const piece2 = $('<div/>').addClass('piece');
 piece2.attr('piecetype', 'sage');
@@ -37,25 +44,30 @@ const sage2 = {
     icon: piece2
 };
 piece2.attr('base-color', 'white');
-piece2.css('top', '5px');
-piece2.css('left', '10px');
+//piece2.css('top', '5px');
+//piece2.css('left', '10px');
 piece2.css('background-color', 'white');
+//piece2.appendTo($('#0'));
+$('#0').append(piece2);
 
 
 
 
-$('#play-area').append(sage1.icon);
-$('#play-area').append(sage2.icon);
+
+//$('#play-area').append(sage1.icon);
+//$('#play-area').append(sage2.icon);
 
 let activePiece;
 
 const startAction = function(event){
     console.log('click piece');
-    console.log(event.target);
-    console.log($(event.target));
-    activePiece = $(event.target);
-    console.log(activePiece);
-    activePiece.css('background-color', '#a10000')
+    //console.log(event.target);
+    //console.log($(event.target));
+    if(!activePiece){
+        activePiece = $(event.target);
+        //console.log(activePiece);
+        activePiece.css('background-color', '#f10000')
+    }
 }
 
 
@@ -67,17 +79,23 @@ const endAction = function(event){
             if(targetVar.attr('class') === 'square'){
                 x1 = targetVar.attr('x-coord');
                 y1 = targetVar.attr('y-coord');
+                targetVar.append(activePiece);
+                activePiece.css('left', '5px');
+                activePiece.css('top', '5px');
+                //move to position of clicked square
+                //activePiece.css('left', (5+(x1*81))+'px');
+                //activePiece.css('top', (10+(y1*79))+'px');
                 base1 = activePiece.attr('base-color');
-                activePiece.css('left', (5+(x1*81))+'px');
-                activePiece.css('top', (10+(y1*79))+'px');
                 activePiece.css('background-color', base1);
                 //activePiece.css('background-color', 'black');
-                console.log(activePiece);
+                //console.log(activePiece);
                 activePiece = null;
             }
         //}
     }
 }
+
+
 
 $('.square').on('click', endAction);
 
@@ -94,13 +112,16 @@ for(eachColor of colors1){
 }
 indexRand = Math.floor(Math.random()*bag1.length)
 const randDraw = bag1[indexRand];
-console.log(randDraw);
-randDraw.css('top', '5px');
-randDraw.css('left', '335px');
-$('#play-area').append(randDraw);
+//console.log(randDraw);
+//randDraw.css('top', '5px');
+//randDraw.css('left', '335px');
+//randDraw.appendTo($('#5'));
+$('#4').append(randDraw);
+//$('#play-area').append(randDraw);
 
 
 $('.piece').on('click', startAction);
 
 //const piece1 = $('<div/>').addClass('piece');
 //piece1.attr('piecetype', 'sage');
+
