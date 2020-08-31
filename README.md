@@ -29,7 +29,10 @@ The element powers btw (as i remember them) are:
 //===================
 
 # *MVP:*
-I want to make a digital version of an old folk game called Elements.  It's played with 4 different colors of pebbles (being earth, air, wind, and fire) on a chess board or a little larger.  It's a bit of a mix between Chess and Go -- each player has exactly one King that must avoid being captured, and the 4 different element stones have different special things they do when you place them.  You draw a "hand" of stones from a bag or something which determines which colors you can play.
+* I want to make a digital version of an old folk game called Elements.
+* It's played with 4 different colors of pebbles (being earth, air, wind, and fire) on a chess board or a little larger.
+* It's a bit of a mix between Chess and Go -- each player has exactly one King that must avoid being captured, and the 4 different element stones have different special things they do when you place them.
+* You draw a "hand" of stones from a bag or something which determines which colors you can play.
 
 //===================
 
