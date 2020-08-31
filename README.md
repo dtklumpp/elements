@@ -1,25 +1,9 @@
 # elements
 play the obscure folk game ELEMENTS
 
-//===================
-
-MVP PITCH:
-I want to make a digital version of an old folk game called Elements.  It's played with 4 different colors of pebbles (being earth, air, wind, and fire) on a chess board or a little larger.  It's a bit of a mix between Chess and Go -- each player has exactly one King that must avoid being captured, and the 4 different element stones have different special things they do when you place them.  You draw a "hand" of stones from a bag or something which determines which colors you can play.
-
-//===================
-
-BASIC GOALS AND STRETCH GOALS:
-The nice thing about this project is i have some flexibility as to how deeply to dive into some of the features.  
-
-My basic MVP will create a Board, let the user place their King, draw Stones from the Bag, move their King around, and Place the stones on the board, with some simplified movement properties.  It will also identify when somebody's King is surrounded, thus Winning the game for their opponent.
-
-From there I want to implement as many cool CSS/jQuery things as I can, as I really want to play around with and get better at various ways to make things pop and transitioon and look good on the page.
-
-And as stretch goals I can implement the more advanced rules for Element Stone movement / powers, plus more advanced CSS stuff if i get to it.
-
 //=====================
 
-USER STORY:
+### USER STORY:
 
 The Users show up ready to PLAY
 
@@ -41,4 +25,22 @@ The element powers btw (as i remember them) are:
 -water flows away (can move an adjacent water stone?)
 -earth blocks jumping and replacement
 -air lets Kings jump over it
+
+//===================
+
+# *MVP:*
+I want to make a digital version of an old folk game called Elements.  It's played with 4 different colors of pebbles (being earth, air, wind, and fire) on a chess board or a little larger.  It's a bit of a mix between Chess and Go -- each player has exactly one King that must avoid being captured, and the 4 different element stones have different special things they do when you place them.  You draw a "hand" of stones from a bag or something which determines which colors you can play.
+
+//===================
+
+## **BASIC GOALS AND STRETCH GOALS:**
+* The nice thing about this project is i have some flexibility as to how deeply to dive into some of the features.  
+
+* My basic MVP will create a Board, let the user place their King, draw Stones from the Bag, move their King around, and Place the stones on the board, with some simplified movement properties.  It will also identify when somebody's King is surrounded, thus Winning the game for their opponent.
+
+* From there I want to implement as many cool CSS/jQuery things as I can, as I really want to play around with and get better at various ways to make things pop and transitioon and look good on the page.
+
+* And as stretch goals I can implement the more advanced rules for Element Stone movement / powers, plus more advanced CSS stuff if i get to it.
+
+
 
