@@ -21,10 +21,10 @@ After each move, the game checks if somebody has won.
 If so, it implements the Congratulations function and transfers $X to the winning User's swiss bank account (and removes it from the loser's?--stretch goal)
 
 The element powers btw (as i remember them) are:
--fire spreads in a line (creates new fire stones at end of adjacent lines)
--water flows away (can move an adjacent water stone?)
--earth blocks jumping and replacement
--air lets Kings jump over it
+* fire spreads in a line (creates new fire stones at end of adjacent lines)
+* water flows away (can move an adjacent water stone?)
+* earth blocks jumping and replacement
+* air lets Kings jump over it
 
 //===================
 
