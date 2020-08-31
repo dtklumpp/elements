@@ -34,6 +34,7 @@ The element powers btw (as i remember them) are:
 * It's a bit of a mix between Chess and Go -- each player has exactly one King that must avoid being captured, and the 4 different element stones have different special things they do when you place them.
 * Earth & Air powers are for MVP (not fire/water)
 * You draw a "hand" of stones which determines which colors you can play.
+* 2 players: both players are playing from the same computer.
 
 //===================
 
@@ -48,6 +49,6 @@ The element powers btw (as i remember them) are:
 
 * Fire & Water powers are stretch goals
 
-
+* Stretch stretch stretch goal: play with someone over the internet!!
 
 
