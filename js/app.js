@@ -14,3 +14,12 @@ for(i=1; i<=5; i++){
         board1.append(newSquare);
     }
 }
+
+const clickSquare = function(event){
+    xProp = $(event.target).attr('x-coord');
+    yProp = $(event.target).attr('y-coord');
+    console.log(xProp+", "+yProp);
+}
+
+$('.square').on('click', clickSquare);
+
