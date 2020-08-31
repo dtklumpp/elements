@@ -12,10 +12,10 @@ They click Start a New Game
 They place their Kings
 
 Then each turn:
--They pick how many king moves they want (minus 1 stone per move)
--They take all their moves (placing stones and moving King)
--When a stone is placed, they also get to implement its element bonus, which usually involves creating or moving adjacent stones around on the board.  In some cases a stone can directly replace a different element stone.
--Can users bid to go first?  I'll try to look this up...
+* They pick how many king moves they want (minus 1 stone per move)
+* They take all their moves (placing stones and moving King)
+* When a stone is placed, they also get to implement its element bonus, which usually involves creating or moving adjacent stones around on the board.  In some cases a stone can directly replace a different element stone.
+* Can users bid to go first?  I'll try to look this up...
 
 After each move, the game checks if somebody has won.
 If so, it implements the Congratulations function and transfers $X to the winning User's swiss bank account (and removes it from the loser's?--stretch goal)
