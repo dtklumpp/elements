@@ -54,21 +54,6 @@ const clickSquare = function(event){
     xProp = target1.attr('x-coord');
     yProp = target1.attr('y-coord');
     console.log("clicksquare coords: ", xProp+", "+yProp);
-    if(fireDrill){
-        //note: should be replaced with create stone method
-        const eachType = elements1[3];
-        const stone1 = $('<div/>').addClass('piece stone');
-        stone1.css('background-color', eachType.color);
-        stone1.attr('base-color', eachType.color);
-        stone1.attr('piecetype', eachType.name);
-        target1.append(stone1);
-        fireDrill = false;
-        resetAdjacentSquares();
-        doneAction = true;
-        $('.piece').on('click', startAction); //this too!
-        adjArray = [];
-        $('#metric').text('');
-    }
 }
 $('.square').on('click', clickSquare);
 
@@ -240,6 +225,25 @@ const resetAdjacentSquares = function(){
 
 const endAction = function(event){
     console.log('end action begin');
+    if(fireDrill){
+        console.log('target1: ', target1);
+        if(target1.children().length === 0){
+            console.log('fire drill');
+            //note: should be replaced with create stone method
+            const eachType = elements1[3];
+            const stone1 = $('<div/>').addClass('piece stone');
+            stone1.css('background-color', eachType.color);
+            stone1.attr('base-color', eachType.color);
+            stone1.attr('piecetype', eachType.name);
+            target1.append(stone1);
+            fireDrill = false;
+            resetAdjacentSquares();
+            doneAction = true;
+            $('.piece').on('click', startAction); //this too!
+            adjArray = [];
+            $('#metric').text('');
+        }
+    }
     if(doneAction){
         doneAction = false;
         return;
@@ -249,7 +253,7 @@ const endAction = function(event){
     if(activePiece
         //&& targetVar.attr('class') === 'square'
         //temporary comment to let Sage walk on wind
-        //&& targetVar.children().length === 0
+        && targetVar.children().length === 0
             ){
 
             if(activePiece.attr('piecetype') === 'sage'){
