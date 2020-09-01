@@ -160,15 +160,25 @@ const getDistance = function(piece1, square1){
 }
 
 const resetActivePiece = function(){
-    base1 = activePiece.attr('base-color');
-    activePiece.css('background-color', base1);
-    //activePiece.css('background-color', 'black');
-    //console.log(activePiece);
-    activePiece = null;
+    if(activePiece){
+        base1 = activePiece.attr('base-color');
+        activePiece.css('background-color', base1);
+        //activePiece.css('background-color', 'black');
+        //console.log(activePiece);
+        activePiece = null;
+    }
 }
 
-const getAdjacentSquares = function(square1){
-
+const getAdjacentSquares = function(centerPiece){
+    adjArray = [];
+    x1 = getCoords(centerPiece).x1;
+    y1 = getCoords(centerPiece).y1;
+    for(eachSquare of allSquares){
+        if(getDistance(centerPiece, eachSquare) < 1.5
+                && eachSquare != centerPiece.parent()){
+                    adjArray.push(eachSquare);
+                }
+    }
 }
 
 const endAction = function(event){
