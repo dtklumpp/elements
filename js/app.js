@@ -50,7 +50,7 @@ for(i=0; i<5; i++){
 
 
 const clickSquare = function(event){
-    target1 = $(event.target);
+    const target1 = $(event.target);
     xProp = target1.attr('x-coord');
     yProp = target1.attr('y-coord');
     console.log("clicksquare coords: ", xProp+", "+yProp);
@@ -225,9 +225,10 @@ const resetAdjacentSquares = function(){
 
 const endAction = function(event){
     console.log('end action begin');
+    let targetVar = $(event.target);
     if(fireDrill){
-        console.log('target1: ', target1);
-        if(target1.children().length === 0){
+        console.log('targetVar: ', targetVar);
+        if(targetVar.children().length === 0){
             console.log('fire drill');
             //note: should be replaced with create stone method
             const eachType = elements1[3];
@@ -235,7 +236,7 @@ const endAction = function(event){
             stone1.css('background-color', eachType.color);
             stone1.attr('base-color', eachType.color);
             stone1.attr('piecetype', eachType.name);
-            target1.append(stone1);
+            targetVar.append(stone1);
             fireDrill = false;
             resetAdjacentSquares();
             doneAction = true;
@@ -248,7 +249,6 @@ const endAction = function(event){
         doneAction = false;
         return;
     }
-    let targetVar = $(event.target);
     console.log("active piecetype: ", activePiece.attr('piecetype'));
     if(activePiece
         //&& targetVar.attr('class') === 'square'
