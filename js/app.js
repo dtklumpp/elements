@@ -169,16 +169,19 @@ const resetActivePiece = function(){
     }
 }
 
-const getAdjacentSquares = function(centerPiece){
+const getAdjacentSquares = function(){
+    centerPiece = activePiece;
     adjArray = [];
-    x1 = getCoords(centerPiece).x1;
-    y1 = getCoords(centerPiece).y1;
+    //x1 = getCoords(centerPiece).x1;
+    //y1 = getCoords(centerPiece).y1;
+    centerID = centerPiece.parent().attr('id');
     for(eachSquare of allSquares){
         if(getDistance(centerPiece, eachSquare) < 1.5
-                && eachSquare != centerPiece.parent()){
+                && eachSquare.attr('id') != centerID){
                     adjArray.push(eachSquare);
                 }
     }
+    console.log(adjArray);
 }
 
 const endAction = function(event){
@@ -288,6 +291,7 @@ $('#button2').on('click', drawStones);
 
 $('#button3').on('click', resetActivePiece);
 
+$('#button4').on('click', getAdjacentSquares);
 
 
 
