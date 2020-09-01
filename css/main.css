@@ -22,9 +22,11 @@ body {
 }
 
 #panel {
-    width: 35vh;
+    width: 40vh;
     height: 60vh;
     background-color: #00a100;
+    display: flex;
+    position: relative;
 }
 
 .piece {
