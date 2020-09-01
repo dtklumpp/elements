@@ -182,6 +182,9 @@ const getAdjacentSquares = function(){
                 }
     }
     console.log(adjArray);
+    for(eachSquare of adjArray){
+        eachSquare.css('border', 'dotted 1px red');
+    }
 }
 
 const endAction = function(event){
