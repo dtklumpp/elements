@@ -7,9 +7,18 @@ $('#button1').on('click', fxn1);
 
 //global vars
 //these constants determine if game is in an intermediate state
-//they are used to tell buttons what to do...
+//they are used to tell even listeners what to do...
+
+//are we in the middle of an element action?
+let midAction = false; //not yet...
+//if so, which action?
 let fireDrill = false;
-let doneAction = false;
+let airDrill = false;
+let waterDrill = false;
+let earthDrill = false;
+//none of them, yet...
+
+
 
 
 const elements1 = [
@@ -69,8 +78,36 @@ $('.square').on('click', clickSquare);
 
 
 
+const makeSage = function(color1) {
+    const newPiece = $('<div/>').addClass('piece sage');
+    newPiece.attr('piecetype', 'sage');
+    newPiece.attr('base-color', color1);
+    newPiece.css('background-color', color1);
+    newPiece.css('z-index', 1);
+    return newPiece;
+}
+
+//make the sages
+const piece1 = makeSage('black');
+const piece2 = makeSage('white');
+
+//put them in the corners to start
+$('#24').append(piece1);
+$('#0').append(piece2);
+
+//eventually i want all pieces to be objects with..
+//..an "icon" representing them in the DOM
+const sage1 = {icon: piece1};
+const sage2 = {icon: piece2};
 
 
+
+
+
+
+
+
+/* 
 
 //replace this with a class factory
 const piece1 = $('<div/>').addClass('piece');
@@ -79,9 +116,11 @@ piece1.css('z-index', 1);
 const sage1 = {
     icon: piece1
 };
+
 piece1.attr('base-color', 'black');
+piece1.css('background-color', 'black');
+
 //piece1.appendTo($('#24'));
-$('#24').append(piece1);
 
 const piece2 = $('<div/>').addClass('piece');
 piece2.attr('piecetype', 'sage');
@@ -94,12 +133,11 @@ piece2.attr('base-color', 'white');
 //piece2.css('left', '10px');
 piece2.css('background-color', 'white');
 //piece2.appendTo($('#0'));
-$('#0').append(piece2);
 
 //$('#play-area').append(sage1.icon);
 //$('#play-area').append(sage2.icon);
 
-
+ */
 
 
 
@@ -213,9 +251,9 @@ const resetAdjacentSquares = function(){
 
 const makeStone = function(elementType) {
     const newStone = $('<div/>').addClass('piece stone');
-    newStone.css('background-color', elementType.color);
-    newStone.attr('base-color', elementType.color);
     newStone.attr('piecetype', elementType.name);
+    newStone.attr('base-color', elementType.color);
+    newStone.css('background-color', elementType.color);
     return newStone;
 }
 
@@ -246,7 +284,7 @@ const endAction = function(event){
             targetVar.append(stone1);
             fireDrill = false;
             resetAdjacentSquares();
-            doneAction = true;
+            midAction = true;
             $('.piece').on('click', startAction); //this too!
             adjArray = [];
             $('#metric').text('');
@@ -262,40 +300,48 @@ const endAction = function(event){
 
         }
     }
-    if(doneAction){
-        doneAction = false;
+    if(midAction){
+        midAction = false;
         return;
     }
     console.log("active piecetype: ", activePiece.attr('piecetype'));
     if(activePiece
         //&& targetVar.attr('class') === 'square'
         //temporary comment to let Sage walk on wind
-        && targetVar.children().length === 0
+        //&& isEmpty(targetVar)
         ){
-            
+            //case Sage
             if(activePiece.attr('piecetype') === 'sage'){
+                if(isEmpty(targetVar)){
+                    const dist1 = getDistance(activePiece,targetVar);
+                    console.log("distance: ", dist1);
+                    if(dist1 < 1.5){
+                        targetVar.append(activePiece);
+                        resetActivePiece();
+                    }
+                }
                 //console.log(getCoords(targetVar).x1);
                 //console.log(getCoords(targetVar).y1);
-                const dist1 = getDistance(activePiece,targetVar);
-                console.log("distance: ", dist1);
-                if(dist1 < 1.5){
+            }
+            //case Fire
+            else if(activePiece.attr('piecetype') === 'fire'){
+                if(isEmpty(targetVar)){
+                    targetVar.append(activePiece);
+                    adjArray = getAdjacentSquares();
+                    highlightAdjacentSquares();
+                    //alert('add a fire piece!');
+                    $('#metric').text('Add a fire piece!');
+                    console.log('fire piece');
+                    resetActivePiece();
+                    fireDrill = true;
+                }
+            }
+            //misc Case
+            else { //placeholder handler for all unspecified types of pieces
+                if(isEmpty(targetVar)){
                     targetVar.append(activePiece);
                     resetActivePiece();
                 }
-            }
-            else if(activePiece.attr('piecetype') === 'fire'){
-                targetVar.append(activePiece);
-                adjArray = getAdjacentSquares();
-                highlightAdjacentSquares();
-                //alert('add a fire piece!');
-                $('#metric').text('Add a fire piece!');
-                console.log('fire piece');
-                resetActivePiece();
-                fireDrill = true;
-            }
-            else {
-                targetVar.append(activePiece);
-                resetActivePiece();
             }
             
             
