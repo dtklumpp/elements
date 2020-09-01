@@ -15,7 +15,7 @@ let midAction = false; //not yet...
 let fireDrill = false;
 let airDrill = false;
 let waterDrill = false;
-let earthDrill = false;
+let earthDrill = false; //this one might not exist
 //none of them, yet...
 
 //more global constants for the game
@@ -66,6 +66,8 @@ const makeSage = function(color1) {
     newPiece.attr('base-color', color1);
     newPiece.css('background-color', color1);
     newPiece.css('z-index', 1);
+    //newPiece.on('click', startAction);
+    //newPiece.on('click', endAction);
     return newPiece;
 }
 
@@ -189,8 +191,8 @@ const makeStone = function(elementType) {
     newStone.attr('piecetype', elementType.name);
     newStone.attr('base-color', elementType.color);
     newStone.css('background-color', elementType.color);
-    newStone.on('click', startAction);
-    newStone.on('click', endAction);
+    //newStone.on('click', startAction);
+    //newStone.on('click', endAction);
     return newStone;
 }
 
@@ -202,7 +204,43 @@ const announce = function(announcement1){
     $('#announcements').text(announcement1); // set announcement area
 }
 
+const noMountain = function(piece1, square1){
+    console.log('got here2');
+    let x1 = piece1.parent().attr('x-coord');
+    let y1 = piece1.parent().attr('y-coord');
+    let x2 = square1.attr('x-coord');
+    let y2 = square1.attr('y-coord');
+console.log("no mountain:: ", x1, x2, y1, y2);
 
+
+    //check if piece at x1, y2 AND at x2, y1 is mountain
+    const id1 = Number(x1) + Number(y2)*5;
+    const id2 = Number(x2) + Number(y1)*5;
+    // const numid1 = Number(id1);
+    // const numid2 = Number(id2);
+    // console.log(numid1);
+    // console.log(numid2);
+    // const string1 = "'#"+id1+"'";
+    // const string2 = "'#"+id2+"'";
+    // console.log(string1);
+    // console.log(string2);
+    //const var1 = $('body').find('div').attr('id', id1);
+    const var3 = $('#'+id1);
+    const var4 = $('#'+id2);
+    // console.log(var3);
+    // const type3 = var3.attr('piecetype');
+    // console.log(type3);
+    const type1 = var3.children().eq(0).attr('piecetype');
+    const type2 = var4.children().eq(0).attr('piecetype');
+    console.log(type1);
+    console.log(type2);
+    if(type1 === 'earth' && type2 === 'earth'){
+        return false;
+    }
+    else{
+        return true;
+    }
+}
 
 
 
@@ -214,6 +252,8 @@ const announce = function(announcement1){
 
 const endAction = function(event){
     console.log('end action begin');
+
+    //more complicated so can click on pieces as squares too...
     let targetVar;
     if ($(event.target).attr('class') === 'square'){
         targetVar = $(event.target);
@@ -222,80 +262,42 @@ const endAction = function(event){
         targetVar = $(event.target).parent();
     }
     console.log("targetVar:", targetVar);;
+    //go back to this if getting weird behavior...
     //let targetVar = $(event.target);
+
+
     if(fireDrill){
-        //console.log('targetVar: ', targetVar);
-        if(isEmpty(targetVar)){
-            console.log('fire drill');
-            const stone1 = makeStone(elements1.fire);
-            targetVar.append(stone1);
-            //later, add listeners to parent elements somehow...
-            $('.piece').on('click', startAction);
-            $('.piece').on('click', endAction);
-            //then reset all the intermediate stuff
-            resetAdjacentSquares();
-            announce(''); // reset announcement area
-            fireDrill = false;
-            return;
-        }
+        fireDrillAction(targetVar);
+    }
+    if(airDrill){
+        sageAction(targetVar);
     }
 
-/*     if(midAction){
+    if(midAction){
         midAction = false;
         return;
     }
- */
-    if(activePiece
-        //&& targetVar.attr('class') === 'square'
-        //temporary comment to let Sage walk on wind
-        //&& isEmpty(targetVar)
+
+    if(activePiece //&& targetVar.attr('class') === 'square'
         ){
             console.log("active piecetype: ", activePiece.attr('piecetype'));
+
             //case Sage
             if(activePiece.attr('piecetype') === 'sage'){
-                const targetType = targetVar.children().eq(0).attr('piecetype');
-                if(isEmpty(targetVar) || targetType === 'air'){
-                    const dist1 = getDistance(activePiece,targetVar);
-                    console.log("distance: ", dist1);
-                    if(dist1 < 1.5){
-                        targetVar.append(activePiece);
-                        if(targetType === 'air'){
-                            adjArray = getAdjacentSquares();
-                            highlightAdjacentSquares();
-                            airDrill = true;
-                            midAction = true;
-                            console.log('air jump!');
-                            announce('keep going!');
-                        }
-                        else{
-                            resetActivePiece();
-                            resetAdjacentSquares();
-                            announce(''); // reset announcement area
-                        }
-                    }
-                }
-                //console.log(getCoords(targetVar).x1);
-                //console.log(getCoords(targetVar).y1);
+                sageAction(targetVar);
             }
+            
             //case Fire
             else if(activePiece.attr('piecetype') === 'fire'){
-                if(isEmpty(targetVar)){
-                    targetVar.append(activePiece);
-                    adjArray = getAdjacentSquares();
-                    highlightAdjacentSquares();
-                    //start the fire element mid-action power sequence:
-                    fireDrill = true;
-                    midAction = true;
-                    //alert('add a fire piece!');
-                    console.log('fire piece');
-                    announce('Add a fire piece!');
-                    //end action
-                    resetActivePiece();
-                }
+                fireAction(targetVar);
             }
-            //case Air
-            //case Earth
+
+            //case Air -- nothing extra
+            //case Earth -- nothing extra
             //case Water
+
+
+
             //misc Case
             else { //placeholder handler for all unspecified types of pieces
                 if(isEmpty(targetVar)){
@@ -308,6 +310,71 @@ const endAction = function(event){
 $('.square').on('click', endAction);
 $('.piece').on('click', endAction);
 
+
+
+const sageAction = function(targetVar){
+    const targetType = targetVar.children().eq(0).attr('piecetype');
+    if(isEmpty(targetVar) || targetType === 'air'){
+        const dist1 = getDistance(activePiece,targetVar);
+        console.log("distance: ", dist1);
+        if(dist1 < 1.5){
+
+            console.log('got here 1');
+            if(noMountain(activePiece,targetVar)){
+                targetVar.append(activePiece);
+                if(targetType === 'air'){
+                    adjArray = getAdjacentSquares();
+                    highlightAdjacentSquares();
+                    airDrill = true;
+                    midAction = true;
+                    console.log('air jump!');
+                    announce('keep going!');
+                }
+                else{
+                    resetActivePiece();
+                    resetAdjacentSquares();
+                    airDrill = false;
+                    midAction = false;
+                    announce(''); // reset announcement area
+                }
+            }
+
+
+        }
+    }
+}
+
+const fireAction = function(targetVar){
+    if(isEmpty(targetVar)){
+        targetVar.append(activePiece);
+        adjArray = getAdjacentSquares();
+        highlightAdjacentSquares();
+        //start the fire element mid-action power sequence:
+        fireDrill = true;
+        midAction = true;
+        //alert('add a fire piece!');
+        console.log('fire piece');
+        announce('Add a fire piece!');
+        //end action
+        resetActivePiece();
+    }
+}
+
+const fireDrillAction = function(targetVar){
+    if(isEmpty(targetVar)){
+        console.log('fire drill');
+        const stone1 = makeStone(elements1.fire);
+        targetVar.append(stone1);
+        //later, add listeners to parent elements somehow...
+        $('.piece').on('click', startAction);
+        $('.piece').on('click', endAction);
+        //then reset all the intermediate stuff
+        resetAdjacentSquares();
+        announce(''); // reset announcement area
+        fireDrill = false;
+        //why doesn't set mid-action back to false?  just deleted??
+    }
+}
 
 
 
