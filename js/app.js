@@ -185,12 +185,12 @@ const movePiece = function(startPiece, endSquare){
 
 const getCoords = function(jqEl){
     if(jqEl.attr('class') = 'square'){
-        x1 = jqEl.attr('x-coord');
-        y1 = jqEl.attr('y-coord');
+        let x1 = jqEl.attr('x-coord');
+        let y1 = jqEl.attr('y-coord');
     }
     else{
-        x1 = jqEl.parent().attr('x-coord');
-        y1 = jqEl.parent().attr('y-coord');
+        let x1 = jqEl.parent().attr('x-coord');
+        let y1 = jqEl.parent().attr('y-coord');
     }
     return {
         x1: x1,
@@ -199,10 +199,10 @@ const getCoords = function(jqEl){
 }
 
 const getDistance = function(piece1, square1){
-    x1 = piece1.parent().attr('x-coord');
-    y1 = piece1.parent().attr('y-coord');
-    x2 = square1.attr('x-coord');
-    y2 = square1.attr('y-coord');
+    let x1 = piece1.parent().attr('x-coord');
+    let y1 = piece1.parent().attr('y-coord');
+    let x2 = square1.attr('x-coord');
+    let y2 = square1.attr('y-coord');
     //console.log("get distance: ", x1, x2, y1, y2);
     return (Math.sqrt((x1-x2)**2 + (y1-y2)**2));
 }
@@ -302,12 +302,12 @@ const endAction = function(event){
         midAction = false;
         return;
     }
-    console.log("active piecetype: ", activePiece.attr('piecetype'));
     if(activePiece
         //&& targetVar.attr('class') === 'square'
         //temporary comment to let Sage walk on wind
         //&& isEmpty(targetVar)
         ){
+            console.log("active piecetype: ", activePiece.attr('piecetype'));
             //case Sage
             if(activePiece.attr('piecetype') === 'sage'){
                 if(isEmpty(targetVar)){
