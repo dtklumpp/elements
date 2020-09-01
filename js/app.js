@@ -73,24 +73,26 @@ const startAction = function(event){
 
 const endAction = function(event){
     console.log('end action begin');
-    if(activePiece){
-        //if(activePiece.attr('piecetype') === 'sage'){
-            let targetVar = $(event.target);
-            if(targetVar.attr('class') === 'square'){
-                x1 = targetVar.attr('x-coord');
-                y1 = targetVar.attr('y-coord');
-                targetVar.append(activePiece);
-                activePiece.css('left', '5px');
-                activePiece.css('top', '5px');
-                //move to position of clicked square
-                //activePiece.css('left', (5+(x1*81))+'px');
-                //activePiece.css('top', (10+(y1*79))+'px');
-                base1 = activePiece.attr('base-color');
-                activePiece.css('background-color', base1);
-                //activePiece.css('background-color', 'black');
-                //console.log(activePiece);
-                activePiece = null;
-            }
+    let targetVar = $(event.target);
+
+    if(activePiece
+        && targetVar.attr('class') === 'square'
+        && targetVar.children().length === 0){
+            //if(activePiece.attr('piecetype') === 'sage'){
+            x1 = targetVar.attr('x-coord');
+            y1 = targetVar.attr('y-coord');
+            targetVar.append(activePiece);
+            activePiece.css('left', '5px');
+            activePiece.css('top', '5px');
+            //move to position of clicked square
+            //activePiece.css('left', (5+(x1*81))+'px');
+            //activePiece.css('top', (10+(y1*79))+'px');
+            base1 = activePiece.attr('base-color');
+            activePiece.css('background-color', base1);
+            //activePiece.css('background-color', 'black');
+            //console.log(activePiece);
+            activePiece = null;
+            
         //}
     }
 }
