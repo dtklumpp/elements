@@ -211,7 +211,13 @@ const resetAdjacentSquares = function(){
     }
 }
 
-
+const makeStone = function(elementType) {
+    const newStone = $('<div/>').addClass('piece stone');
+    newStone.css('background-color', elementType.color);
+    newStone.attr('base-color', elementType.color);
+    newStone.attr('piecetype', elementType.name);
+    return newStone;
+}
 
 
 
@@ -234,11 +240,14 @@ const endAction = function(event){
         if(targetVar.children().length === 0){
             console.log('fire drill');
             //note: should be replaced with create stone method
-            const eachType = elements1[3];
+            const stone1 = makeStone(elements1[3]);
+
+            /* const eachType = elements1[3];
             const stone1 = $('<div/>').addClass('piece stone');
             stone1.css('background-color', eachType.color);
             stone1.attr('base-color', eachType.color);
-            stone1.attr('piecetype', eachType.name);
+            stone1.attr('piecetype', eachType.name); */
+
             targetVar.append(stone1);
             fireDrill = false;
             resetAdjacentSquares();
