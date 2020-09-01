@@ -205,35 +205,17 @@ const announce = function(announcement1){
 }
 
 const noMountain = function(piece1, square1){
-    console.log('got here2');
     let x1 = piece1.parent().attr('x-coord');
     let y1 = piece1.parent().attr('y-coord');
     let x2 = square1.attr('x-coord');
     let y2 = square1.attr('y-coord');
-console.log("no mountain:: ", x1, x2, y1, y2);
-
-
     //check if piece at x1, y2 AND at x2, y1 is mountain
     const id1 = Number(x1) + Number(y2)*5;
     const id2 = Number(x2) + Number(y1)*5;
-    // const numid1 = Number(id1);
-    // const numid2 = Number(id2);
-    // console.log(numid1);
-    // console.log(numid2);
-    // const string1 = "'#"+id1+"'";
-    // const string2 = "'#"+id2+"'";
-    // console.log(string1);
-    // console.log(string2);
-    //const var1 = $('body').find('div').attr('id', id1);
     const var3 = $('#'+id1);
     const var4 = $('#'+id2);
-    // console.log(var3);
-    // const type3 = var3.attr('piecetype');
-    // console.log(type3);
     const type1 = var3.children().eq(0).attr('piecetype');
     const type2 = var4.children().eq(0).attr('piecetype');
-    console.log(type1);
-    console.log(type2);
     if(type1 === 'earth' && type2 === 'earth'){
         return false;
     }
@@ -318,8 +300,6 @@ const sageAction = function(targetVar){
         const dist1 = getDistance(activePiece,targetVar);
         console.log("distance: ", dist1);
         if(dist1 < 1.5){
-
-            console.log('got here 1');
             if(noMountain(activePiece,targetVar)){
                 targetVar.append(activePiece);
                 if(targetType === 'air'){
