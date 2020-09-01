@@ -5,9 +5,17 @@ const fxn1 = function() {
 }
 $('#button1').on('click', fxn1);
 
+//global vars
+let fireDrill = false;
+let doneAction = false;
 
 
-
+const elements1 = [
+    {name: 'water', color: 'blue'},
+    {name: 'air', color: 'grey'},
+    {name: 'earth', color: 'brown'},
+    {name: 'fire', color: 'orange'}
+]
 
 
 
@@ -40,9 +48,22 @@ for(i=0; i<5; i++){
 
 
 const clickSquare = function(event){
-    xProp = $(event.target).attr('x-coord');
-    yProp = $(event.target).attr('y-coord');
+    target1 = $(event.target);
+    xProp = target1.attr('x-coord');
+    yProp = target1.attr('y-coord');
     console.log(xProp+", "+yProp);
+    if(fireDrill){
+        //note: should be replaced with create stone method
+        const eachType = elements1[3];
+        const stone1 = $('<div/>').addClass('piece stone');
+        stone1.css('background-color', eachType.color);
+        stone1.attr('base-color', eachType.color);
+        stone1.attr('piecetype', eachType.name);
+        target1.append(stone1);
+        fireDrill = false;
+        resetAdjacentSquares();
+        doneAction = true;
+    }
 }
 $('.square').on('click', clickSquare);
 
@@ -169,9 +190,9 @@ const resetActivePiece = function(){
     }
 }
 
+let adjArray = [];
 const getAdjacentSquares = function(){
     centerPiece = activePiece;
-    adjArray = [];
     //x1 = getCoords(centerPiece).x1;
     //y1 = getCoords(centerPiece).y1;
     centerID = centerPiece.parent().attr('id');
@@ -185,12 +206,23 @@ const getAdjacentSquares = function(){
     for(eachSquare of adjArray){
         eachSquare.css('border', 'dotted 1px red');
     }
+    return adjArray;
+}
+
+const resetAdjacentSquares = function(){
+    for(eachSquare of adjArray){
+        eachSquare.css('border', 'solid 1px black');
+    }
 }
 
 const endAction = function(event){
     console.log('end action begin');
+    if(doneAction){
+        doneAction = false;
+        return;
+    }
     let targetVar = $(event.target);
-
+    console.log(activePiece.attr('piecetype'));
     if(activePiece
         && targetVar.attr('class') === 'square'
         && targetVar.children().length === 0){
@@ -204,6 +236,14 @@ const endAction = function(event){
                     targetVar.append(activePiece);
                     resetActivePiece();
                 }
+            }
+            else if(activePiece.attr('piecetype') === 'fire'){
+                    targetVar.append(activePiece);
+                    adjArray = getAdjacentSquares();
+                    alert('add a fire piece!');
+                    console.log('fire piece');
+                    resetActivePiece();
+                    fireDrill = true;
             }
             else {
                     targetVar.append(activePiece);
@@ -249,21 +289,18 @@ $('.square').on('click', endAction);
 
 
 
+//see elements definition top of page
 
 const bag1 = [];
 //const colors1 = ['blue', 'grey', 'brown', 'orange']
-const elements1 = [
-    {name: 'water', color: 'blue'},
-    {name: 'air', color: 'grey'},
-    {name: 'earth', color: 'brown'},
-    {name: 'fire', color: 'orange'}
-]
+
+//gah this really needs to be a factory...
 for(eachType of elements1){
     for(i=1; i<=15; i++){
         const stone1 = $('<div/>').addClass('piece stone');
         stone1.css('background-color', eachType.color);
         stone1.attr('base-color', eachType.color);
-        stone1.addClass(eachType.name);
+        stone1.attr('piecetype', eachType.name);
         bag1.push(stone1);
     }
 }
