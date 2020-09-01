@@ -1,13 +1,22 @@
 console.log('you are hearing me talk');
-
 //credits: got cool idea from liz re: 1s and 2s
-
 const fxn1 = function() {
     console.log('clicked button 1');
 }
 $('#button1').on('click', fxn1);
 
+
+
+
+
+
+
+
+
+
+
 const board1 = $('#board');
+const allSquares = [];
 for(i=0; i<5; i++){
     for(j=0; j<5; j++){
         const newSquare = $('<div/>').addClass('square');
@@ -15,17 +24,42 @@ for(i=0; i<5; i++){
         newSquare.attr('y-coord', i);
         newSquare.css('position', 'relative');
         newSquare.attr('id', j+5*i);
+        allSquares.push(newSquare);
         board1.append(newSquare);
     }
 }
+
+
+
+
+
+
+
+
+
+
 
 const clickSquare = function(event){
     xProp = $(event.target).attr('x-coord');
     yProp = $(event.target).attr('y-coord');
     console.log(xProp+", "+yProp);
 }
-
 $('.square').on('click', clickSquare);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 //replace this with a class factory
 const piece1 = $('<div/>').addClass('piece');
@@ -36,7 +70,6 @@ const sage1 = {
 piece1.attr('base-color', 'black');
 //piece1.appendTo($('#24'));
 $('#24').append(piece1);
-
 
 const piece2 = $('<div/>').addClass('piece');
 piece2.attr('piecetype', 'sage');
@@ -50,12 +83,23 @@ piece2.css('background-color', 'white');
 //piece2.appendTo($('#0'));
 $('#0').append(piece2);
 
-
-
-
-
 //$('#play-area').append(sage1.icon);
 //$('#play-area').append(sage2.icon);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 let activePiece;
 
@@ -69,6 +113,19 @@ const startAction = function(event){
         activePiece.css('background-color', '#f10000')
     }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 /* 
@@ -110,6 +167,9 @@ const resetActivePiece = function(){
     activePiece = null;
 }
 
+const getAdjacentSquares = function(square1){
+
+}
 
 const endAction = function(event){
     console.log('end action begin');
@@ -165,6 +225,15 @@ $('.square').on('click', endAction);
 
 
 
+
+
+
+
+
+
+
+
+
 const bag1 = [];
 //const colors1 = ['blue', 'grey', 'brown', 'orange']
 const elements1 = [
@@ -191,10 +260,6 @@ const randDraw = bag1.splice(indexRand, 1)[0];
 $('#4').append(randDraw);
 //$('#play-area').append(randDraw);
 
-
-
-
-
 //make fxn of n?
 const drawStones = function(){
     console.log('clicked button 2');
@@ -211,6 +276,15 @@ const drawStones = function(){
 
 $('#button2').on('click', drawStones);
 
+$('#button3').on('click', resetActivePiece);
+
+
+
+
+
+
+
+
 
 
 
@@ -220,4 +294,3 @@ $('#button2').on('click', drawStones);
 $('.piece').on('click', startAction);
 //const piece1 = $('<div/>').addClass('piece');
 //piece1.attr('piecetype', 'sage');
-
