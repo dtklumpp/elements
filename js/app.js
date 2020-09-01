@@ -57,25 +57,6 @@ for(i=0; i<5; i++){
 
 
 
-//testing clicking square
-/* 
-const clickSquare = function(event){
-    const target1 = $(event.target);
-    xProp = target1.attr('x-coord');
-    yProp = target1.attr('y-coord');
-    console.log("clicksquare coords: ", xProp+", "+yProp);
-}
-$('.square').on('click', clickSquare);
- */
-
-
-
-
-
-
-
-
-
 
 
 
@@ -100,45 +81,6 @@ $('#0').append(piece2);
 //..an "icon" representing them in the DOM
 const sage1 = {icon: piece1};
 const sage2 = {icon: piece2};
-
-
-
-
-
-
-
-
-/* 
-
-//replace this with a class factory
-const piece1 = $('<div/>').addClass('piece');
-piece1.attr('piecetype', 'sage');
-piece1.css('z-index', 1);
-const sage1 = {
-    icon: piece1
-};
-
-piece1.attr('base-color', 'black');
-piece1.css('background-color', 'black');
-
-//piece1.appendTo($('#24'));
-
-const piece2 = $('<div/>').addClass('piece');
-piece2.attr('piecetype', 'sage');
-piece2.attr('z-index', 1);
-const sage2 = {
-    icon: piece2
-};
-piece2.attr('base-color', 'white');
-//piece2.css('top', '5px');
-//piece2.css('left', '10px');
-piece2.css('background-color', 'white');
-//piece2.appendTo($('#0'));
-
-//$('#play-area').append(sage1.icon);
-//$('#play-area').append(sage2.icon);
-
- */
 
 
 
@@ -179,13 +121,6 @@ const startAction = function(event){
 
 
 
-
-/* 
-const movePiece = function(startPiece, endSquare){
-    x1 = endSquare.attr('x-coord');
-    y1 = endSquare.attr('y-coord');
-    endSquare.append(activePiece);
-} */
 
 const getCoords = function(jqEl){
     if(jqEl.attr('class') = 'square'){
@@ -288,16 +223,6 @@ const endAction = function(event){
             resetAdjacentSquares();
             $('#announcements').text(''); // reset announcement area
             fireDrill = false;
-            
-
-
-            //note: should be replaced with create stone method //done
-            /* const eachType = elements1[3];
-            const stone1 = $('<div/>').addClass('piece stone');
-            stone1.css('background-color', eachType.color);
-            stone1.attr('base-color', eachType.color);
-            stone1.attr('piecetype', eachType.name); */
-
         }
     }
     if(midAction){
@@ -345,25 +270,6 @@ const endAction = function(event){
                     resetActivePiece();
                 }
             }
-            
-            
-            //movePiece(activePiece, targetVar);
-            //if(activePiece.attr('piecetype') === 'sage'){
-           ////// x1 = targetVar.attr('x-coord');
-           ////// y1 = targetVar.attr('y-coord');
-           ///////////targetVar.append(activePiece);
-            //activePiece.css('left', '5px');
-            //activePiece.css('top', '5px');
-            //move to position of clicked square
-            //activePiece.css('left', (5+(x1*81))+'px');
-            //activePiece.css('top', (10+(y1*79))+'px');
-        //base1 = activePiece.attr('base-color');
-        //activePiece.css('background-color', base1);
-            //activePiece.css('background-color', 'black');
-            //console.log(activePiece);
-        //activePiece = null;
-            
-        //}
     }
 }
 $('.square').on('click', endAction);
@@ -394,25 +300,13 @@ const bag1 = [];
 for(eachType in elements1){
     console.log(eachType);
     for(i=1; i<=15; i++){
-
         const stone1 = makeStone(elements1[eachType]);
-
-/*         const stone1 = $('<div/>').addClass('piece stone');
-        stone1.css('background-color', eachType.color);
-        stone1.attr('base-color', eachType.color);
-        stone1.attr('piecetype', eachType.name); */
-
         bag1.push(stone1);
     }
 }
 indexRand = Math.floor(Math.random()*bag1.length)
 const randDraw = bag1.splice(indexRand, 1)[0];
-//console.log(randDraw);
-//randDraw.css('top', '5px');
-//randDraw.css('left', '335px');
-//randDraw.appendTo($('#5'));
 $('#4').append(randDraw);
-//$('#play-area').append(randDraw);
 
 //make fxn of n?
 const drawStones = function(){
@@ -433,18 +327,6 @@ $('#button2').on('click', drawStones);
 $('#button3').on('click', resetActivePiece);
 
 $('#button4').on('click', getAdjacentSquares);
-
-
-
-
-
-
-
-
-
-
-
-
 
 $('.piece').on('click', startAction);
 //const piece1 = $('<div/>').addClass('piece');
