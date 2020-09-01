@@ -18,6 +18,11 @@ let waterDrill = false;
 let earthDrill = false;
 //none of them, yet...
 
+//more global constants for the game
+let adjArray = [];
+let activePiece;
+
+
 
 
 //make elements
@@ -148,7 +153,6 @@ piece2.css('background-color', 'white');
 
 
 
-let activePiece;
 
 const startAction = function(event){
     event.stopPropagation();
@@ -217,7 +221,6 @@ const resetActivePiece = function(){
     }
 }
 
-let adjArray = [];
 const getAdjacentSquares = function(){
     centerPiece = activePiece;
     //x1 = getCoords(centerPiece).x1;
@@ -283,9 +286,8 @@ const endAction = function(event){
             $('.piece').on('click', startAction);
             //then reset all the intermediate stuff
             resetAdjacentSquares();
-            midAction = true;
+            $('#announcements').text(''); // reset announcement area
             fireDrill = false;
-            $('#metric').text(''); // reset announcement area
             
 
 
@@ -327,11 +329,13 @@ const endAction = function(event){
                     targetVar.append(activePiece);
                     adjArray = getAdjacentSquares();
                     highlightAdjacentSquares();
-                    //alert('add a fire piece!');
-                    $('#metric').text('Add a fire piece!');
-                    console.log('fire piece');
                     resetActivePiece();
+                    //start the fire element mid-action power sequence:
                     fireDrill = true;
+                    midAction = true;
+                    //alert('add a fire piece!');
+                    $('#announcements').text('Add a fire piece!');
+                    console.log('fire piece');
                 }
             }
             //misc Case

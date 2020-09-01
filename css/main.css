@@ -50,10 +50,18 @@ body {
     /* making bit smaller so not as bad */
 }
 
-#metric {
+#announcements {
     width: 420px;
     height: 5vh;
     background-color: #0000a1;
+    color: red;
+    font-size: 24px;
+}
+
+#metric {
+    width: 420px;
+    height: 5vh;
+    background-color: #c1c1c1;
     color: red;
     font-size: 24px;
 }
