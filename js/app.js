@@ -90,6 +90,7 @@ $('.square').on('click', clickSquare);
 //replace this with a class factory
 const piece1 = $('<div/>').addClass('piece');
 piece1.attr('piecetype', 'sage');
+piece1.css('z-index: 1');
 const sage1 = {
     icon: piece1
 };
@@ -99,6 +100,7 @@ $('#24').append(piece1);
 
 const piece2 = $('<div/>').addClass('piece');
 piece2.attr('piecetype', 'sage');
+piece2.css('z-index: 1');
 const sage2 = {
     icon: piece2
 };
@@ -228,21 +230,27 @@ const endAction = function(event){
     }
     let targetVar = $(event.target);
     console.log(activePiece.attr('piecetype'));
+    //
     if(activePiece
-        && targetVar.attr('class') === 'square'
-        && targetVar.children().length === 0){
-
-            if(activePiece.attr('piecetype') === 'sage'){
-                //console.log(getCoords(targetVar).x1);
-                //console.log(getCoords(targetVar).y1);
-                const dist1 = getDistance(activePiece,targetVar);
-                console.log(dist1);
-                if(dist1 < 1.5){
-                    targetVar.append(activePiece);
-                    resetActivePiece();
-                }
+    && targetVar.attr('class') === 'square'){
+        //
+        if(activePiece.attr('piecetype') === 'sage'
+        && (
+        (targetVar.children().length === 0)
+        || (targetVar.children().eq(0).attr('piectype') === 'air')
+        )){
+            //console.log(getCoords(targetVar).x1);
+            //console.log(getCoords(targetVar).y1);
+            const dist1 = getDistance(activePiece,targetVar);
+            console.log(dist1);
+            if(dist1 < 1.5){
+                targetVar.append(activePiece);
+                resetActivePiece();
             }
-            else if(activePiece.attr('piecetype') === 'fire'){
+        }
+    }
+            else if(activePiece.attr('piecetype') === 'fire'
+                && targetVar.children().length === 0){
                     targetVar.append(activePiece);
                     adjArray = getAdjacentSquares();
                     //alert('add a fire piece!');
@@ -251,7 +259,7 @@ const endAction = function(event){
                     resetActivePiece();
                     fireDrill = true;
             }
-            else {
+            else if(targetVar.children().length === 0) {
                     targetVar.append(activePiece);
                     resetActivePiece();
             }
@@ -275,7 +283,7 @@ const endAction = function(event){
             
         //}
     }
-}
+//}
 $('.square').on('click', endAction);
 
 
