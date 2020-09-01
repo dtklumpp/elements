@@ -53,7 +53,7 @@ const clickSquare = function(event){
     target1 = $(event.target);
     xProp = target1.attr('x-coord');
     yProp = target1.attr('y-coord');
-    console.log(xProp+", "+yProp);
+    console.log("clicksquare coords: ", xProp+", "+yProp);
     if(fireDrill){
         //note: should be replaced with create stone method
         const eachType = elements1[3];
@@ -132,6 +132,7 @@ $('#0').append(piece2);
 let activePiece;
 
 const startAction = function(event){
+    event.stopPropagation();
     console.log('click piece');
     //console.log(event.target);
     //console.log($(event.target));
@@ -183,7 +184,7 @@ const getDistance = function(piece1, square1){
     y1 = piece1.parent().attr('y-coord');
     x2 = square1.attr('x-coord');
     y2 = square1.attr('y-coord');
-    console.log(x1, x2, y1, y2);
+    console.log("get distance: ", x1, x2, y1, y2);
     return (Math.sqrt((x1-x2)**2 + (y1-y2)**2));
 }
 
@@ -209,7 +210,7 @@ const getAdjacentSquares = function(){
                     adjArray.push(eachSquare);
                 }
     }
-    console.log(adjArray);
+    console.log("adjArray: ", adjArray);
     for(eachSquare of adjArray){
         eachSquare.css('border', 'dotted 1px red');
     }
@@ -222,6 +223,21 @@ const resetAdjacentSquares = function(){
     }
 }
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 const endAction = function(event){
     console.log('end action begin');
     if(doneAction){
@@ -229,9 +245,9 @@ const endAction = function(event){
         return;
     }
     let targetVar = $(event.target);
-    console.log(activePiece.attr('piecetype'));
+    console.log("active piecetype: ", activePiece.attr('piecetype'));
     if(activePiece
-        && targetVar.attr('class') === 'square'
+        //&& targetVar.attr('class') === 'square'
         //temporary comment to let Sage walk on wind
         //&& targetVar.children().length === 0
             ){
@@ -240,7 +256,7 @@ const endAction = function(event){
                 //console.log(getCoords(targetVar).x1);
                 //console.log(getCoords(targetVar).y1);
                 const dist1 = getDistance(activePiece,targetVar);
-                console.log(dist1);
+                console.log("distance: ", dist1);
                 if(dist1 < 1.5){
                     targetVar.append(activePiece);
                     resetActivePiece();
