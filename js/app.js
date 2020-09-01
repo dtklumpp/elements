@@ -6,6 +6,8 @@ const fxn1 = function() {
 $('#button1').on('click', fxn1);
 
 //global vars
+//these constants determine if game is in an intermediate state
+//they are used to tell buttons what to do...
 let fireDrill = false;
 let doneAction = false;
 
@@ -63,6 +65,9 @@ const clickSquare = function(event){
         fireDrill = false;
         resetAdjacentSquares();
         doneAction = true;
+        $('.piece').on('click', startAction); //this too!
+        adjArray = [];
+        $('#metric').text('');
     }
 }
 $('.square').on('click', clickSquare);
@@ -240,7 +245,8 @@ const endAction = function(event){
             else if(activePiece.attr('piecetype') === 'fire'){
                     targetVar.append(activePiece);
                     adjArray = getAdjacentSquares();
-                    alert('add a fire piece!');
+                    //alert('add a fire piece!');
+                    $('#metric').text('Add a fire piece!');
                     console.log('fire piece');
                     resetActivePiece();
                     fireDrill = true;
