@@ -21,6 +21,7 @@ let earthDrill = false;
 //more global constants for the game
 let adjArray = [];
 let activePiece;
+const allSquares = [];
 
 
 
@@ -36,7 +37,6 @@ const elements1 = {
 
 //make board
 const board1 = $('#board');
-const allSquares = [];
 for(i=0; i<5; i++){
     for(j=0; j<5; j++){
         const newSquare = $('<div/>').addClass('square');
@@ -196,7 +196,9 @@ const isEmpty = function(checkSquare){
     return (checkSquare.children().length === 0)
 }
 
-
+const announce = function(announcement1){
+    $('#announcements').text(announcement1); // set announcement area
+}
 
 
 
@@ -221,14 +223,17 @@ const endAction = function(event){
             $('.piece').on('click', startAction);
             //then reset all the intermediate stuff
             resetAdjacentSquares();
-            $('#announcements').text(''); // reset announcement area
+            announce(''); // reset announcement area
             fireDrill = false;
+            return;
         }
     }
-    if(midAction){
+
+/*     if(midAction){
         midAction = false;
         return;
     }
+ */
     if(activePiece
         //&& targetVar.attr('class') === 'square'
         //temporary comment to let Sage walk on wind
@@ -237,12 +242,25 @@ const endAction = function(event){
             console.log("active piecetype: ", activePiece.attr('piecetype'));
             //case Sage
             if(activePiece.attr('piecetype') === 'sage'){
-                if(isEmpty(targetVar)){
+                const targetType = targetVar.children().eq(0).attr('piecetype');
+                if(isEmpty(targetVar) || targetType === 'air'){
                     const dist1 = getDistance(activePiece,targetVar);
                     console.log("distance: ", dist1);
                     if(dist1 < 1.5){
                         targetVar.append(activePiece);
-                        resetActivePiece();
+                        if(targetType === 'air'){
+                            adjArray = getAdjacentSquares();
+                            highlightAdjacentSquares();
+                            airDrill = true;
+                            midAction = true;
+                            console.log('air jump!');
+                            announce('keep going!');
+                        }
+                        else{
+                            resetActivePiece();
+                            resetAdjacentSquares();
+                            announce(''); // reset announcement area
+                        }
                     }
                 }
                 //console.log(getCoords(targetVar).x1);
@@ -254,15 +272,19 @@ const endAction = function(event){
                     targetVar.append(activePiece);
                     adjArray = getAdjacentSquares();
                     highlightAdjacentSquares();
-                    resetActivePiece();
                     //start the fire element mid-action power sequence:
                     fireDrill = true;
                     midAction = true;
                     //alert('add a fire piece!');
-                    $('#announcements').text('Add a fire piece!');
                     console.log('fire piece');
+                    announce('Add a fire piece!');
+                    //end action
+                    resetActivePiece();
                 }
             }
+            //case Air
+            //case Earth
+            //case Water
             //misc Case
             else { //placeholder handler for all unspecified types of pieces
                 if(isEmpty(targetVar)){
