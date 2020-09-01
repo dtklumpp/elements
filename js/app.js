@@ -230,7 +230,9 @@ const endAction = function(event){
     console.log(activePiece.attr('piecetype'));
     if(activePiece
         && targetVar.attr('class') === 'square'
-        && targetVar.children().length === 0){
+        //temporary comment to let Sage walk on wind
+        //&& targetVar.children().length === 0
+            ){
 
             if(activePiece.attr('piecetype') === 'sage'){
                 //console.log(getCoords(targetVar).x1);
