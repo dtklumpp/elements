@@ -196,10 +196,13 @@ const getAdjacentSquares = function(){
                 }
     }
     console.log("adjArray: ", adjArray);
+    return adjArray;
+}
+
+const highlightAdjacentSquares = function(){
     for(eachSquare of adjArray){
         eachSquare.css('border', 'dotted 1px red');
     }
-    return adjArray;
 }
 
 const resetAdjacentSquares = function(){
@@ -254,8 +257,8 @@ const endAction = function(event){
         //&& targetVar.attr('class') === 'square'
         //temporary comment to let Sage walk on wind
         && targetVar.children().length === 0
-            ){
-
+        ){
+            
             if(activePiece.attr('piecetype') === 'sage'){
                 //console.log(getCoords(targetVar).x1);
                 //console.log(getCoords(targetVar).y1);
@@ -267,20 +270,21 @@ const endAction = function(event){
                 }
             }
             else if(activePiece.attr('piecetype') === 'fire'){
-                    targetVar.append(activePiece);
-                    adjArray = getAdjacentSquares();
-                    //alert('add a fire piece!');
-                    $('#metric').text('Add a fire piece!');
-                    console.log('fire piece');
-                    resetActivePiece();
-                    fireDrill = true;
+                targetVar.append(activePiece);
+                adjArray = getAdjacentSquares();
+                highlightAdjacentSquares();
+                //alert('add a fire piece!');
+                $('#metric').text('Add a fire piece!');
+                console.log('fire piece');
+                resetActivePiece();
+                fireDrill = true;
             }
             else {
-                    targetVar.append(activePiece);
-                    resetActivePiece();
+                targetVar.append(activePiece);
+                resetActivePiece();
             }
-
-
+            
+            
             //movePiece(activePiece, targetVar);
             //if(activePiece.attr('piecetype') === 'sage'){
            ////// x1 = targetVar.attr('x-coord');
