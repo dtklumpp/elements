@@ -123,7 +123,7 @@ const startAction = function(event){
 
 
 const getCoords = function(jqEl){
-    if(jqEl.attr('class') = 'square'){
+    if(jqEl.attr('class') === 'square'){
         let x1 = jqEl.attr('x-coord');
         let y1 = jqEl.attr('y-coord');
     }
@@ -189,6 +189,8 @@ const makeStone = function(elementType) {
     newStone.attr('piecetype', elementType.name);
     newStone.attr('base-color', elementType.color);
     newStone.css('background-color', elementType.color);
+    newStone.on('click', startAction);
+    newStone.on('click', endAction);
     return newStone;
 }
 
@@ -212,7 +214,15 @@ const announce = function(announcement1){
 
 const endAction = function(event){
     console.log('end action begin');
-    let targetVar = $(event.target);
+    let targetVar;
+    if ($(event.target).attr('class') === 'square'){
+        targetVar = $(event.target);
+    }
+    else{
+        targetVar = $(event.target).parent();
+    }
+    console.log("targetVar:", targetVar);;
+    //let targetVar = $(event.target);
     if(fireDrill){
         //console.log('targetVar: ', targetVar);
         if(isEmpty(targetVar)){
@@ -221,6 +231,7 @@ const endAction = function(event){
             targetVar.append(stone1);
             //later, add listeners to parent elements somehow...
             $('.piece').on('click', startAction);
+            $('.piece').on('click', endAction);
             //then reset all the intermediate stuff
             resetAdjacentSquares();
             announce(''); // reset announcement area
@@ -295,7 +306,7 @@ const endAction = function(event){
     }
 }
 $('.square').on('click', endAction);
-
+$('.piece').on('click', endAction);
 
 
 
@@ -342,6 +353,7 @@ const drawStones = function(){
     }
     //omg this is so WET i just copy-pasted
     $('.piece').on('click', startAction);
+    $('.piece').on('click', endAction);
 }
 
 $('#button2').on('click', drawStones);

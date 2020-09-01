@@ -27,6 +27,7 @@ body {
     background-color: #00a100;
     display: flex;
     position: relative;
+    flex-wrap: wrap;
 }
 
 .piece {
