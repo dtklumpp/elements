@@ -20,20 +20,16 @@ let earthDrill = false;
 
 
 
-
-const elements1 = [
-    {name: 'water', color: 'blue'},
-    {name: 'air', color: 'grey'},
-    {name: 'earth', color: 'brown'},
-    {name: 'fire', color: 'orange'}
-]
-
-
+//make elements
+const elements1 = {
+    water: {name: 'water', color: 'blue'},
+    air: {name: 'air', color: 'grey'},
+    earth: {name: 'earth', color: 'brown'},
+    fire: {name: 'fire', color: 'orange'}
+}
 
 
-
-
-
+//make board
 const board1 = $('#board');
 const allSquares = [];
 for(i=0; i<5; i++){
@@ -56,8 +52,8 @@ for(i=0; i<5; i++){
 
 
 
-
-
+//testing clicking square
+/* 
 const clickSquare = function(event){
     const target1 = $(event.target);
     xProp = target1.attr('x-coord');
@@ -65,7 +61,7 @@ const clickSquare = function(event){
     console.log("clicksquare coords: ", xProp+", "+yProp);
 }
 $('.square').on('click', clickSquare);
-
+ */
 
 
 
@@ -207,7 +203,7 @@ const getDistance = function(piece1, square1){
     y1 = piece1.parent().attr('y-coord');
     x2 = square1.attr('x-coord');
     y2 = square1.attr('y-coord');
-    console.log("get distance: ", x1, x2, y1, y2);
+    //console.log("get distance: ", x1, x2, y1, y2);
     return (Math.sqrt((x1-x2)**2 + (y1-y2)**2));
 }
 
@@ -247,6 +243,7 @@ const resetAdjacentSquares = function(){
     for(eachSquare of adjArray){
         eachSquare.css('border', 'solid 1px black');
     }
+    adjArray = [];
 }
 
 const makeStone = function(elementType) {
@@ -280,14 +277,15 @@ const endAction = function(event){
         //console.log('targetVar: ', targetVar);
         if(isEmpty(targetVar)){
             console.log('fire drill');
-            const stone1 = makeStone(elements1[3]);
+            const stone1 = makeStone(elements1.fire);
             targetVar.append(stone1);
-            fireDrill = false;
+            //later, add listeners to parent elements somehow...
+            $('.piece').on('click', startAction);
+            //then reset all the intermediate stuff
             resetAdjacentSquares();
             midAction = true;
-            $('.piece').on('click', startAction); //this too!
-            adjArray = [];
-            $('#metric').text('');
+            fireDrill = false;
+            $('#metric').text(''); // reset announcement area
             
 
 
@@ -389,10 +387,11 @@ const bag1 = [];
 //const colors1 = ['blue', 'grey', 'brown', 'orange']
 
 //gah this really needs to be a factory...
-for(eachType of elements1){
+for(eachType in elements1){
+    console.log(eachType);
     for(i=1; i<=15; i++){
 
-        const stone1 = makeStone(eachType);
+        const stone1 = makeStone(elements1[eachType]);
 
 /*         const stone1 = $('<div/>').addClass('piece stone');
         stone1.css('background-color', eachType.color);
