@@ -219,6 +219,9 @@ const makeStone = function(elementType) {
     return newStone;
 }
 
+const isEmpty = function(checkSquare){
+    return (checkSquare.children().length === 0)
+}
 
 
 
@@ -236,18 +239,10 @@ const endAction = function(event){
     console.log('end action begin');
     let targetVar = $(event.target);
     if(fireDrill){
-        console.log('targetVar: ', targetVar);
-        if(targetVar.children().length === 0){
+        //console.log('targetVar: ', targetVar);
+        if(isEmpty(targetVar)){
             console.log('fire drill');
-            //note: should be replaced with create stone method
             const stone1 = makeStone(elements1[3]);
-
-            /* const eachType = elements1[3];
-            const stone1 = $('<div/>').addClass('piece stone');
-            stone1.css('background-color', eachType.color);
-            stone1.attr('base-color', eachType.color);
-            stone1.attr('piecetype', eachType.name); */
-
             targetVar.append(stone1);
             fireDrill = false;
             resetAdjacentSquares();
@@ -255,6 +250,16 @@ const endAction = function(event){
             $('.piece').on('click', startAction); //this too!
             adjArray = [];
             $('#metric').text('');
+            
+
+
+            //note: should be replaced with create stone method //done
+            /* const eachType = elements1[3];
+            const stone1 = $('<div/>').addClass('piece stone');
+            stone1.css('background-color', eachType.color);
+            stone1.attr('base-color', eachType.color);
+            stone1.attr('piecetype', eachType.name); */
+
         }
     }
     if(doneAction){
@@ -340,10 +345,14 @@ const bag1 = [];
 //gah this really needs to be a factory...
 for(eachType of elements1){
     for(i=1; i<=15; i++){
-        const stone1 = $('<div/>').addClass('piece stone');
+
+        const stone1 = makeStone(eachType);
+
+/*         const stone1 = $('<div/>').addClass('piece stone');
         stone1.css('background-color', eachType.color);
         stone1.attr('base-color', eachType.color);
-        stone1.attr('piecetype', eachType.name);
+        stone1.attr('piecetype', eachType.name); */
+
         bag1.push(stone1);
     }
 }
