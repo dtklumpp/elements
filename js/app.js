@@ -90,6 +90,7 @@ $('.square').on('click', clickSquare);
 //replace this with a class factory
 const piece1 = $('<div/>').addClass('piece');
 piece1.attr('piecetype', 'sage');
+piece1.css('z-index', 1);
 const sage1 = {
     icon: piece1
 };
@@ -99,6 +100,7 @@ $('#24').append(piece1);
 
 const piece2 = $('<div/>').addClass('piece');
 piece2.attr('piecetype', 'sage');
+piece2.attr('z-index', 1);
 const sage2 = {
     icon: piece2
 };
