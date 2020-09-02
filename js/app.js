@@ -19,7 +19,7 @@ let midAction = false; //not yet...
 let fireDrill = false;
 let airDrill = false;
 let waterDrill = false;
-let earthDrill = false; //this one might not exist
+let earthDrill = false;
 //none of them, yet...
 
 //more global constants for the game
@@ -103,7 +103,7 @@ const makeSage = function(color1) {
     newPiece.css('z-index', 1);
     //test add listeners
     newPiece.on('click', startAction);
-    newPiece.on('click', endAction);
+    newPiece.on('click', clickAction);
     return newPiece;
 }
 
@@ -114,7 +114,7 @@ const makeStone = function(elementType) {
     newStone.css('background-color', elementType.color);
     //test add listeners
     newStone.on('click', startAction);
-    newStone.on('click', endAction);
+    newStone.on('click', clickAction);
     return newStone;
 }
 
@@ -205,6 +205,7 @@ const announce = function(announcement1){
     $('#announcements').text(announcement1); // set announcement area
 }
 
+//checks if there's a mountain in the way of the Sage
 const noMountain = function(piece1, square1){
     let x1 = piece1.parent().attr('x-coord');
     let y1 = piece1.parent().attr('y-coord');
@@ -213,10 +214,8 @@ const noMountain = function(piece1, square1){
     //check if piece at x1, y2 AND at x2, y1 is mountain
     const id1 = Number(x1) + Number(y2)*5;
     const id2 = Number(x2) + Number(y1)*5;
-    const var3 = $('#'+id1);
-    const var4 = $('#'+id2);
-    const type1 = var3.children().eq(0).attr('piecetype');
-    const type2 = var4.children().eq(0).attr('piecetype');
+    const type1 = $('#'+id1).children().eq(0).attr('piecetype');
+    const type2 = $('#'+id2).children().eq(0).attr('piecetype');
     if(type1 === 'earth' && type2 === 'earth'){
         return false;
     }
@@ -244,33 +243,30 @@ const noMountain = function(piece1, square1){
 
 
 
-const endAction = function(event){
+const clickAction = function(event){
     console.log('end action begin');
 
     //more complicated so can click on pieces as squares too...
-    let targetVar;
-    if ($(event.target).attr('class') === 'square')
-        {targetVar = $(event.target);}
-    else {targetVar = $(event.target).parent();}
+    let isSquare = ($(event.target).attr('class') === 'square')
+    let targetVar = isSquare ? $(event.target) : $(event.target).parent();
     console.log("targetVar:", targetVar);
-    //go back to this if getting weird behavior...
-    //let targetVar = $(event.target);
     console.log(targetVar.attr('x-coord'), targetVar.attr('y-coord'));
+    //go back to this if getting weird behavior...
 
-
-
-    if(fireDrill || airDrill || waterDrill || earthDrill){
-        midActionFunction(targetVar);
-    }
-
-    else {
-        endActionFunction(targetVar);
-    }
-
+    if(midAction){midActionFunction(targetVar);}
+    else {endActionFunction(targetVar);}
 }
-$('.square').on('click', endAction);
-//test drop listeners
-//$('.piece').on('click', endAction);
+$('.square').on('click', clickAction);
+
+
+
+
+
+
+
+
+
+
 
 const midActionFunction = function(targetVar){
     if(fireDrill){fireDrillAction(targetVar);}
