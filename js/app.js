@@ -107,6 +107,17 @@ const makeSage = function(color1) {
     return newPiece;
 }
 
+const makeStone = function(elementType) {
+    const newStone = $('<div/>').addClass('piece stone');
+    newStone.attr('piecetype', elementType.name);
+    newStone.attr('base-color', elementType.color);
+    newStone.css('background-color', elementType.color);
+    //test add listeners
+    newStone.on('click', startAction);
+    newStone.on('click', endAction);
+    return newStone;
+}
+
 
 
 
@@ -186,17 +197,6 @@ const resetAdjacentSquares = function(){
     adjArray = [];
 }
 
-const makeStone = function(elementType) {
-    const newStone = $('<div/>').addClass('piece stone');
-    newStone.attr('piecetype', elementType.name);
-    newStone.attr('base-color', elementType.color);
-    newStone.css('background-color', elementType.color);
-    //test add listeners
-    newStone.on('click', startAction);
-    newStone.on('click', endAction);
-    return newStone;
-}
-
 const isEmpty = function(checkSquare){
     return (checkSquare.children().length === 0)
 }
@@ -255,23 +255,47 @@ const endAction = function(event){
     console.log("targetVar:", targetVar);
     //go back to this if getting weird behavior...
     //let targetVar = $(event.target);
-
     console.log(targetVar.attr('x-coord'), targetVar.attr('y-coord'));
 
-    if(fireDrill){fireDrillAction(targetVar);}
-    if(airDrill){sageAction(targetVar);}
-    if(waterDrill){waterDrillAction(targetVar);}
 
+
+    if(fireDrill || airDrill || waterDrill || earthDrill){
+        midActionFunction(targetVar);
+    }
+    else{
+        endActionFunction(targetVar);
+    }
+
+
+    /* 
     if(midAction){
         midAction = false;
         return;
-    }
+    } */
+    
+    
+    
+    
+    
+    
+}
+$('.square').on('click', endAction);
+//test drop listeners
+//$('.piece').on('click', endAction);
 
+const midActionFunction = function(targetVar){
+    if(fireDrill){fireDrillAction(targetVar);}
+    if(airDrill){airDrillAction(targetVar);}
+    if(waterDrill){waterDrillAction(targetVar);}
+    if(earthDrill){earthDrillAction(targetVar);}
+}
+
+const endActionFunction = function(targetVar){
     //had: && targetVar.attr('class') === 'square'
     //but it always is...
     if(activePiece){
         console.log("active piecetype: ", activePiece.attr('piecetype'));
-
+        
         //case Sage:
         //case Fire:
         //case Water:
@@ -280,22 +304,18 @@ const endAction = function(event){
         if(activePiece.attr('piecetype') === 'fire'){fireAction(targetVar);}
         else
         if(activePiece.attr('piecetype') === 'water'){waterAction(targetVar);}
-
+        
         //case Air -- nothing extra
         //case Earth -- nothing extra
-
+        
         //misc Case
         //placeholder handler for all unspecified types of pieces
         else {if(isEmpty(targetVar)){
-                targetVar.append(activePiece);
-                resetActivePiece();
-            }
-        }
+            targetVar.append(activePiece);
+            resetActivePiece();
+        }}
     }
 }
-$('.square').on('click', endAction);
-//test drop listeners
-//$('.piece').on('click', endAction);
 
 
 
@@ -313,11 +333,9 @@ $('.square').on('click', endAction);
 
 
 
-
-
-
-
-
+const airDrillAction = function(targetVar){
+    sageAction(targetVar);
+}
 
 const sageAction = function(targetVar){
     const targetType = targetVar.children().eq(0).attr('piecetype');
@@ -383,11 +401,15 @@ const fireDrillAction = function(targetVar){
         resetAdjacentSquares();
         announce(''); // reset announcement area
         fireDrill = false;
+        midAction = false;
         //why doesn't set mid-action back to false?  just deleted??
     }
 }
 
-
+//nothing happens here
+const earthDrillAction = function(targetVar){
+    return;
+}
 
 
 
