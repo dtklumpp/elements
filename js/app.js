@@ -82,8 +82,8 @@ const startAction = function(event){
         //console.log($(event.target));
         if(!activePiece){
             activePiece = $(event.target);
-            //console.log(activePiece);
-            activePiece.css('background-color', '#f10000')
+            //activePiece.css('background-color', '#f10000')
+            activePiece.css('border', 'solid 2px red');
         }
     }
 }
@@ -168,10 +168,9 @@ const getDistance = function(piece1, square1){
 
 const resetActivePiece = function(){
     if(activePiece){
-        base1 = activePiece.attr('base-color');
-        activePiece.css('background-color', base1);
-        //activePiece.css('background-color', 'black');
-        //console.log(activePiece);
+        //base1 = activePiece.attr('base-color');
+        //activePiece.css('background-color', base1);
+        activePiece.css('border', 'solid 1px black');
         activePiece = null;
     }
 }
@@ -255,30 +254,30 @@ const clickAction = function(event){
 
     //more complicated so can click on pieces as squares too...
     let isSquare = ($(event.target).attr('class') === 'square')
-    let targetVar = isSquare ? $(event.target) : $(event.target).parent();
-    console.log("targetVar:", targetVar);
-    console.log(getCoords(targetVar));
+    let targetSq = isSquare ? $(event.target) : $(event.target).parent();
+    console.log("targetSq:", targetSq);
+    console.log(getCoords(targetSq));
     //go back to this if getting weird behavior...
 
-    if(midAction){midActionFunction(targetVar);}
-    else {endActionFunction(targetVar);}
+    if(midAction){midActionFunction(targetSq);}
+    else {endActionFunction(targetSq);}
 }
 
-const midActionFunction = function(targetVar){
-    if(fireDrill){fireDrillAction(targetVar);}
-    if(airDrill){airDrillAction(targetVar);}
-    if(waterDrill){waterDrillAction(targetVar);}
-    if(earthDrill){earthDrillAction(targetVar);}
+const midActionFunction = function(targetSq){
+    if(fireDrill){fireDrillAction(targetSq);}
+    if(airDrill){airDrillAction(targetSq);}
+    if(waterDrill){waterDrillAction(targetSq);}
+    if(earthDrill){earthDrillAction(targetSq);}
 }
 
-const endActionFunction = function(targetVar){
+const endActionFunction = function(targetSq){
     if(activePiece){
         console.log("active piecetype: ", activePiece.attr('piecetype'));
         //
-        if(activePiece.attr('piecetype') === 'sage'){sageAction(targetVar);} else 
-        if(activePiece.attr('piecetype') === 'fire'){fireAction(targetVar);} else
-        if(activePiece.attr('piecetype') === 'water'){waterAction(targetVar);}
-        else {miscAction(targetVar)}
+        if(activePiece.attr('piecetype') === 'sage'){sageAction(targetSq);} else 
+        if(activePiece.attr('piecetype') === 'fire'){fireAction(targetSq);} else
+        if(activePiece.attr('piecetype') === 'water'){waterAction(targetSq);}
+        else {miscAction(targetSq)}
         //last is placeholder handler for all unspecified types of pieces
     }
 }
@@ -287,11 +286,14 @@ const endActionFunction = function(targetVar){
 
 
 
-const waterAction = function(targetVar){
+
+//oh one stone is only flowing 1 score --- good!  but why?
+
+const waterAction = function(targetSq){
     console.log('water action');
-    if(isEmpty(targetVar)){
+    if(isEmpty(targetSq)){
         //console.log('got here 3');
-        targetVar.append(activePiece);
+        targetSq.append(activePiece);
         waterArray.push(activePiece);
         waterDrill = true;
         midAction = true;
@@ -304,9 +306,10 @@ const waterAction = function(targetVar){
     }
 }
 
-const waterDrillAction = function(targetVar){
-    const dist2 = getDistance(activePiece,targetVar);
-    if(isEmpty(targetVar)
+const waterDrillAction = function(targetSq){
+    //debugger;
+    const dist2 = getDistance(activePiece,targetSq);
+    if(isEmpty(targetSq)
         && waterCounter > 0
         && dist2 < 1.5
         ){
@@ -314,20 +317,20 @@ const waterDrillAction = function(targetVar){
             resetAdjacentSquares();
             waterCounter-- ;
             let lastPosition;
-            let nextPosition = targetVar;
+            let nextPosition = targetSq;
             for(eachDrop of waterArray){
                 lastPosition = eachDrop.parent();
                 nextPosition.append(eachDrop);
                 nextPosition = lastPosition;
             }
         }
-    else if(waterFlow === false && !(isEmpty(targetVar))){
-        const targetPiece = targetVar.children().eq(0);
+    else if(waterFlow === false && !(isEmpty(targetSq))){
+        const targetPiece = targetSq.children().eq(0);
         const targetType = targetPiece.attr('piecetype');
-        const dist1 = getDistance(waterTail,targetVar);
+        const dist1 = getDistance(waterTail,targetSq);
         if(dist1 < 1.5
             && targetType === 'water'
-            && !(waterIDs.includes(targetVar.attr('id')))
+            && !(waterIDs.includes(targetSq.attr('id')))
             ){
                 waterArray.push(targetPiece);
                 waterTail = targetPiece;
@@ -335,6 +338,7 @@ const waterDrillAction = function(targetVar){
                 adjArray = getAdjacentSquares(waterTail);
                 highlightAdjacentSquares();
                 waterIDs.push(waterTail.parent().attr('id'));
+                //waterCounter = waterArray.length;
                 waterCounter = 7;
                 //later should be waterArray.length;                
             }
@@ -353,7 +357,7 @@ const waterDrillAction = function(targetVar){
 //set watertail
 //set watercounters
 //make center square global
-//change name targetvar targetSq
+//change name targetVar targetSq
 //make sure tail not double back--------------
 }
 
@@ -367,25 +371,25 @@ const waterDrillAction = function(targetVar){
 
 
 
-const airDrillAction = function(targetVar){
-    sageAction(targetVar);
+const airDrillAction = function(targetSq){
+    sageAction(targetSq);
 }
 
-const miscAction = function(targetVar){
-    if(isEmpty(targetVar)){
-        targetVar.append(activePiece);
+const miscAction = function(targetSq){
+    if(isEmpty(targetSq)){
+        targetSq.append(activePiece);
         resetActivePiece();
     }
 }
 
-const sageAction = function(targetVar){
-    const targetType = targetVar.children().eq(0).attr('piecetype');
-    if(isEmpty(targetVar) || targetType === 'air'){
-        const dist1 = getDistance(activePiece,targetVar);
+const sageAction = function(targetSq){
+    const targetType = targetSq.children().eq(0).attr('piecetype');
+    if(isEmpty(targetSq) || targetType === 'air'){
+        const dist1 = getDistance(activePiece,targetSq);
         console.log("distance: ", dist1);
         if(dist1 < 1.5){
-            if(noMountain(activePiece,targetVar)){
-                targetVar.append(activePiece);
+            if(noMountain(activePiece,targetSq)){
+                targetSq.append(activePiece);
                 if(targetType === 'air'){
                     console.log('air drill');
                     adjArray = getAdjacentSquares(activePiece);
@@ -412,10 +416,10 @@ const sageAction = function(targetVar){
     }
 }
 
-const fireAction = function(targetVar){
+const fireAction = function(targetSq){
     console.log('fire action');
-    if(isEmpty(targetVar)){
-        targetVar.append(activePiece);
+    if(isEmpty(targetSq)){
+        targetSq.append(activePiece);
         adjArray = getAdjacentSquares(activePiece);
         highlightAdjacentSquares();
         //start the fire element mid-action power sequence:
@@ -428,12 +432,12 @@ const fireAction = function(targetVar){
     }
 }
 
-const fireDrillAction = function(targetVar){
+const fireDrillAction = function(targetSq){
     console.log('fire drill');
-    if(isEmpty(targetVar)){
+    if(isEmpty(targetSq)){
         console.log('fire drill');
         const stone1 = makeStone(elements1.fire);
-        targetVar.append(stone1);
+        targetSq.append(stone1);
         //later, add listeners to parent elements somehow...
         //test drop listeners
         //$('.piece').on('click', startAction);
@@ -448,7 +452,7 @@ const fireDrillAction = function(targetVar){
 }
 
 //nothing happens here
-const earthDrillAction = function(targetVar){
+const earthDrillAction = function(targetSq){
     return;
 }
 
@@ -538,7 +542,7 @@ const drawStones = function(){
         index1 = Math.floor(Math.random()*bag1.length);
         newStone = bag1.splice(index1,1)[0];
         newStone.css('position', 'relative');
-        $('#panel').append(newStone);
+        $('#hand1').append(newStone);
 
     }
     //omg this is so WET i just copy-pasted

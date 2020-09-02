@@ -30,6 +30,19 @@ body {
     flex-wrap: wrap;
 }
 
+.hand, .moves {
+    width: 40vh;
+    height: 5vh;
+    background-color: #545485;
+    display: flex;
+    position: relative;
+    flex-wrap: wrap;
+}
+
+.hand {
+    height: 20vh;
+}
+
 .piece {
     width: 7vh;
     height: 7vh;
