@@ -44,6 +44,7 @@ let drewStones = false;
 
 
 
+
 //make elements
 const elements1 = {
     water: {name: 'water', color: 'blue'},
