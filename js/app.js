@@ -121,6 +121,7 @@ const makeSage = function(color1, playerVar) {
     newPiece.css('background-color', color1);
     newPiece.css('z-index', 1);
     newPiece.attr('owner', playerVar);
+    newPiece.attr('id', 'Sage'+playerVar)
     //test add listeners
     newPiece.on('click', startAction);
     newPiece.on('click', clickAction);
@@ -202,9 +203,33 @@ const resetActivePiece = function(){
         };
         activePiece = null;
     }
-    movesLeft-- ;
+    //reset and display moves left
+    //movesLeft-- ; nono only for sage action
+    console.log('here we go');
+    announce('here we go');
     $('#moves'+whoseTurn()).text('moves left: '+movesLeft);
-    if(!movesLeft){switchTurns()};
+    //switch turns if out of moves
+    if(!movesLeft){
+        $('#hand'+whoseTurn()).empty();
+        switchTurns()
+        //check for victory
+        let currentSage = $('#Sage'+whoseTurn());
+        adjArray = getAdjacentSquares(currentSage);
+        let gameEnd = true;
+        for(eachSquare of adjArray){
+            if(isEmpty(eachSquare) && (eachSquare.attr('piecetype') != 'air')){
+                gameEnd = false;
+            }
+        }
+        if(gameEnd){
+            winner1 = 3 - (whoseTurn());
+            announce('Sage trapped!  Player '+winner1+' is the winner!!!');
+        }
+        console.log('here we are');
+        announce('player '+whoseTurn()+' to play!');
+        //announce('here we are');
+    
+    };
 }
 
 const getAdjacentSquares = function(inputPiece){
@@ -432,11 +457,12 @@ const sageAction = function(targetSq){
                     announce('keep going!');
                 }
                 else{
-                    resetActivePiece();
                     resetAdjacentSquares();
                     airDrill = false;
                     midAction = false;
                     announce(''); // reset announcement area
+                    movesLeft-- ;
+                    resetActivePiece();
                 }
             }
             else{
@@ -460,7 +486,7 @@ const fireAction = function(targetSq){
         //alert('add a fire piece!');
         announce('Add a fire piece!');
         //end action
-        resetActivePiece();
+        //resetActivePiece();
     }
 }
 
@@ -480,6 +506,7 @@ const fireDrillAction = function(targetSq){
         fireDrill = false;
         midAction = false;
         //why doesn't set mid-action back to false?  just deleted??
+        resetActivePiece();
     }
 }
 
