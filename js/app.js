@@ -181,6 +181,9 @@ const getDistance = function(piece1, square1){
     return (Math.sqrt((x1-x2)**2 + (y1-y2)**2));
 }
 
+
+//this function is conveniently doubling as the end-of-turn function
+//should probably rename it to that
 const resetActivePiece = function(){
     if(activePiece){
         //base1 = activePiece.attr('base-color');
@@ -192,6 +195,9 @@ const resetActivePiece = function(){
         };
         activePiece = null;
     }
+    movesLeft-- ;
+    $('#moves'+whoseTurn()).text('moves left: '+movesLeft);
+    if(!movesLeft){switchTurns()};
 }
 
 const getAdjacentSquares = function(inputPiece){
@@ -569,6 +575,11 @@ const drawStones = function(n){
         $('#hand'+whoseTurn()).append(newStone);
     }
     movesLeft = 5 - n;
+    let turnVar = whoseTurn();
+    let bannerVar = $('#moves'+turnVar);
+    bannerVar.text('Moves Left: '+movesLeft);
+    console.log(turnVar);
+    console.log(bannerVar);
     console.log('moves left: ', movesLeft);
     //omg this is so WET i just copy-pasted
     //test drop listeners

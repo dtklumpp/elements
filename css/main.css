@@ -33,7 +33,7 @@ body {
 .hand, .moves, .scoreboard {
     width: 40vh;
     height: 5vh;
-    background-color: #545485;
+    background-color: #818191;
     display: flex;
     position: relative;
     flex-wrap: wrap;
@@ -41,6 +41,10 @@ body {
 
 .hand {
     height: 20vh;
+}
+
+.moves {
+    color: #a03333;
 }
 
 
