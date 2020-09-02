@@ -5,6 +5,10 @@ const fxn1 = function() {
 }
 $('#button1').on('click', fxn1);
 
+
+//everything below here could be the "Game Object"
+//would just have to add a lot of "this" keywords...
+
 //global vars
 //these constants determine if game is in an intermediate state
 //they are used to tell even listeners what to do...
@@ -22,6 +26,9 @@ let earthDrill = false; //this one might not exist
 let adjArray = [];
 let activePiece;
 const allSquares = [];
+//
+let waterArray = [];
+
 
 
 
@@ -60,55 +67,46 @@ for(i=0; i<5; i++){
 
 
 
+
+
+
+const startAction = function(event){
+    console.log('click piece');
+    event.stopPropagation();
+    if(!midAction){
+        //console.log(event.target);
+        //console.log($(event.target));
+        if(!activePiece){
+            activePiece = $(event.target);
+            //console.log(activePiece);
+            activePiece.css('background-color', '#f10000')
+        }
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
 const makeSage = function(color1) {
     const newPiece = $('<div/>').addClass('piece sage');
     newPiece.attr('piecetype', 'sage');
     newPiece.attr('base-color', color1);
     newPiece.css('background-color', color1);
     newPiece.css('z-index', 1);
-    //newPiece.on('click', startAction);
-    //newPiece.on('click', endAction);
+    //test add listeners
+    newPiece.on('click', startAction);
+    newPiece.on('click', endAction);
     return newPiece;
 }
 
-//make the sages
-const piece1 = makeSage('black');
-const piece2 = makeSage('white');
-
-//put them in the corners to start
-$('#24').append(piece1);
-$('#0').append(piece2);
-
-//eventually i want all pieces to be objects with..
-//..an "icon" representing them in the DOM
-const sage1 = {icon: piece1};
-const sage2 = {icon: piece2};
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-const startAction = function(event){
-    event.stopPropagation();
-    console.log('click piece');
-    //console.log(event.target);
-    //console.log($(event.target));
-    if(!activePiece){
-        activePiece = $(event.target);
-        //console.log(activePiece);
-        activePiece.css('background-color', '#f10000')
-    }
-}
 
 
 
@@ -159,23 +157,25 @@ const resetActivePiece = function(){
 }
 
 const getAdjacentSquares = function(){
-    centerPiece = activePiece;
-    //x1 = getCoords(centerPiece).x1;
-    //y1 = getCoords(centerPiece).y1;
-    centerID = centerPiece.parent().attr('id');
-    for(eachSquare of allSquares){
-        if(getDistance(centerPiece, eachSquare) < 1.5
-                && eachSquare.attr('id') != centerID){
-                    adjArray.push(eachSquare);
-                }
+    if(activePiece){
+        centerPiece = activePiece;
+        //x1 = getCoords(centerPiece).x1;
+        //y1 = getCoords(centerPiece).y1;
+        centerID = centerPiece.parent().attr('id');
+        for(eachSquare of allSquares){
+            if(getDistance(centerPiece, eachSquare) < 1.5
+                    && eachSquare.attr('id') != centerID){
+                        adjArray.push(eachSquare);
+                    }
+        }
+        console.log("adjArray: ", adjArray);
+        return adjArray;
     }
-    console.log("adjArray: ", adjArray);
-    return adjArray;
 }
 
 const highlightAdjacentSquares = function(){
     for(eachSquare of adjArray){
-        eachSquare.css('border', 'dotted 1px red');
+        eachSquare.css('border', 'dotted 2px red');
     }
 }
 
@@ -191,8 +191,9 @@ const makeStone = function(elementType) {
     newStone.attr('piecetype', elementType.name);
     newStone.attr('base-color', elementType.color);
     newStone.css('background-color', elementType.color);
-    //newStone.on('click', startAction);
-    //newStone.on('click', endAction);
+    //test add listeners
+    newStone.on('click', startAction);
+    newStone.on('click', endAction);
     return newStone;
 }
 
@@ -232,65 +233,89 @@ const noMountain = function(piece1, square1){
 
 
 
+
+
+
+
+
+
+
+
+
+
+
 const endAction = function(event){
     console.log('end action begin');
 
     //more complicated so can click on pieces as squares too...
     let targetVar;
-    if ($(event.target).attr('class') === 'square'){
-        targetVar = $(event.target);
-    }
-    else{
-        targetVar = $(event.target).parent();
-    }
-    console.log("targetVar:", targetVar);;
+    if ($(event.target).attr('class') === 'square')
+        {targetVar = $(event.target);}
+    else {targetVar = $(event.target).parent();}
+    console.log("targetVar:", targetVar);
     //go back to this if getting weird behavior...
     //let targetVar = $(event.target);
 
+    console.log(targetVar.attr('x-coord'), targetVar.attr('y-coord'));
 
-    if(fireDrill){
-        fireDrillAction(targetVar);
-    }
-    if(airDrill){
-        sageAction(targetVar);
-    }
+    if(fireDrill){fireDrillAction(targetVar);}
+    if(airDrill){sageAction(targetVar);}
+    if(waterDrill){waterDrillAction(targetVar);}
 
     if(midAction){
         midAction = false;
         return;
     }
 
-    if(activePiece //&& targetVar.attr('class') === 'square'
-        ){
-            console.log("active piecetype: ", activePiece.attr('piecetype'));
+    //had: && targetVar.attr('class') === 'square'
+    //but it always is...
+    if(activePiece){
+        console.log("active piecetype: ", activePiece.attr('piecetype'));
 
-            //case Sage
-            if(activePiece.attr('piecetype') === 'sage'){
-                sageAction(targetVar);
+        //case Sage:
+        //case Fire:
+        //case Water:
+        if(activePiece.attr('piecetype') === 'sage'){sageAction(targetVar);}
+        else 
+        if(activePiece.attr('piecetype') === 'fire'){fireAction(targetVar);}
+        else
+        if(activePiece.attr('piecetype') === 'water'){waterAction(targetVar);}
+
+        //case Air -- nothing extra
+        //case Earth -- nothing extra
+
+        //misc Case
+        //placeholder handler for all unspecified types of pieces
+        else {if(isEmpty(targetVar)){
+                targetVar.append(activePiece);
+                resetActivePiece();
             }
-            
-            //case Fire
-            else if(activePiece.attr('piecetype') === 'fire'){
-                fireAction(targetVar);
-            }
-
-            //case Air -- nothing extra
-            //case Earth -- nothing extra
-            //case Water
-
-
-
-            //misc Case
-            else { //placeholder handler for all unspecified types of pieces
-                if(isEmpty(targetVar)){
-                    targetVar.append(activePiece);
-                    resetActivePiece();
-                }
-            }
+        }
     }
 }
 $('.square').on('click', endAction);
-$('.piece').on('click', endAction);
+//test drop listeners
+//$('.piece').on('click', endAction);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -303,6 +328,7 @@ const sageAction = function(targetVar){
             if(noMountain(activePiece,targetVar)){
                 targetVar.append(activePiece);
                 if(targetType === 'air'){
+                    console.log('air drill');
                     adjArray = getAdjacentSquares();
                     highlightAdjacentSquares();
                     airDrill = true;
@@ -318,6 +344,9 @@ const sageAction = function(targetVar){
                     announce(''); // reset announcement area
                 }
             }
+            else{
+                console.log('mountain drill');
+            }
 
 
         }
@@ -325,6 +354,7 @@ const sageAction = function(targetVar){
 }
 
 const fireAction = function(targetVar){
+    console.log('fire action');
     if(isEmpty(targetVar)){
         targetVar.append(activePiece);
         adjArray = getAdjacentSquares();
@@ -333,7 +363,6 @@ const fireAction = function(targetVar){
         fireDrill = true;
         midAction = true;
         //alert('add a fire piece!');
-        console.log('fire piece');
         announce('Add a fire piece!');
         //end action
         resetActivePiece();
@@ -341,13 +370,15 @@ const fireAction = function(targetVar){
 }
 
 const fireDrillAction = function(targetVar){
+    console.log('fire drill');
     if(isEmpty(targetVar)){
         console.log('fire drill');
         const stone1 = makeStone(elements1.fire);
         targetVar.append(stone1);
         //later, add listeners to parent elements somehow...
-        $('.piece').on('click', startAction);
-        $('.piece').on('click', endAction);
+        //test drop listeners
+        //$('.piece').on('click', startAction);
+        //$('.piece').on('click', endAction);
         //then reset all the intermediate stuff
         resetAdjacentSquares();
         announce(''); // reset announcement area
@@ -371,12 +402,61 @@ const fireDrillAction = function(targetVar){
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//make the sages
+const piece1 = makeSage('black');
+const piece2 = makeSage('white');
+
+//put them in the corners to start
+$('#24').append(piece1);
+$('#0').append(piece2);
+
+//eventually i want all pieces to be objects with..
+//..an "icon" representing them in the DOM
+const sage1 = {icon: piece1};
+const sage2 = {icon: piece2};
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//move this all to the top later
+
 //see elements definition top of page
 
 const bag1 = [];
 //const colors1 = ['blue', 'grey', 'brown', 'orange']
 
 //gah this really needs to be a factory...
+//populate bag of stones
 for(eachType in elements1){
     console.log(eachType);
     for(i=1; i<=15; i++){
@@ -399,8 +479,9 @@ const drawStones = function(){
 
     }
     //omg this is so WET i just copy-pasted
-    $('.piece').on('click', startAction);
-    $('.piece').on('click', endAction);
+    //test drop listeners
+    //$('.piece').on('click', startAction);
+    //$('.piece').on('click', endAction);
 }
 
 $('#button2').on('click', drawStones);
@@ -409,6 +490,13 @@ $('#button3').on('click', resetActivePiece);
 
 $('#button4').on('click', getAdjacentSquares);
 
-$('.piece').on('click', startAction);
+
+
+//test drop listeners
+//$('.piece').on('click', startAction);
+//first piece never gets endAction
+//$('.piece').on('click', endAction);
+
+
 //const piece1 = $('<div/>').addClass('piece');
 //piece1.attr('piecetype', 'sage');
