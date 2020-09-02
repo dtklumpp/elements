@@ -186,6 +186,10 @@ const resetActivePiece = function(){
         //base1 = activePiece.attr('base-color');
         //activePiece.css('background-color', base1);
         activePiece.css('border', 'solid 1px black');
+
+        if(activePiece.attr('piecetype') != 'sage'){
+            activePiece.attr('owner', 5); //there will never be a player 5---5 is the board itself
+        };
         activePiece = null;
     }
 }
