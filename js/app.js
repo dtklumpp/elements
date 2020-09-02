@@ -37,8 +37,7 @@ let waterCounter = 1;
 //global constants for turn handling
 let firstPlayerTurn = true;
 //these should be put in the player object
-let p1Moves;
-let p2Moves;
+let movesLeft;
 
 
 
@@ -550,8 +549,9 @@ const drawStones = function(n){
         newStone = bag1.splice(index1,1)[0];
         newStone.css('position', 'relative');
         $('#hand1').append(newStone);
-
     }
+    movesLeft = 5 - n;
+    console.log('moves left: ', movesLeft);
     //omg this is so WET i just copy-pasted
     //test drop listeners
     //$('.piece').on('click', startAction);
