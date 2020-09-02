@@ -23,14 +23,14 @@ body {
 
 #panel {
     width: 40vh;
-    height: 60vh;
+    height: 70vh;
     background-color: #00a100;
     display: flex;
     position: relative;
     flex-wrap: wrap;
 }
 
-.hand, .moves {
+.hand, .moves, .scoreboard {
     width: 40vh;
     height: 5vh;
     background-color: #545485;
@@ -42,6 +42,7 @@ body {
 .hand {
     height: 20vh;
 }
+
 
 .piece {
     width: 7vh;

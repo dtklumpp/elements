@@ -34,6 +34,13 @@ let waterTail;
 let waterFlow = false;
 let waterCounter = 1;
 
+//global constants for turn handling
+let firstPlayerTurn = true;
+//these should be put in the player object
+let p1Moves;
+let p2Moves;
+
+
 
 
 
@@ -536,9 +543,9 @@ const randDraw = bag1.splice(indexRand, 1)[0];
 $('#4').append(randDraw);
 
 //make fxn of n?
-const drawStones = function(){
+const drawStones = function(n){
     console.log('clicked button 2');
-    for(i = 0; i < 5; i++){
+    for(i = 0; i < n; i++){
         index1 = Math.floor(Math.random()*bag1.length);
         newStone = bag1.splice(index1,1)[0];
         newStone.css('position', 'relative');
@@ -551,11 +558,21 @@ const drawStones = function(){
     //$('.piece').on('click', endAction);
 }
 
+const draw4Stones = function(){drawStones(4);}
+const draw3Stones = function(){drawStones(3);}
+const draw2Stones = function(){drawStones(2);}
+const draw1Stones = function(){drawStones(1);}
+
+
 $('.square').on('click', clickAction);
 
-$('#button2').on('click', drawStones);
+$('#button4').on('click', draw4Stones);
+$('#button3').on('click', draw3Stones);
+$('#button2').on('click', draw2Stones);
+$('#button1').on('click', draw1Stones);
 
-$('#button3').on('click', resetActivePiece);
+
+$('#buttonUnselect').on('click', resetActivePiece);
 
 //$('#button4').on('click', getAdjacentSquares);
 
