@@ -1,9 +1,9 @@
 console.log('you are hearing me talk');
 //credits: got cool idea from liz re: 1s and 2s
-const fxn1 = function() {
-    console.log('clicked button 1');
-}
-$('#button1').on('click', fxn1);
+// const fxn1 = function() {
+//     console.log('clicked button 1');
+// }
+// $('#button1').on('click', fxn1);
 
 
 //everything below here could be the "Game Object"
@@ -25,6 +25,7 @@ let earthDrill = false;
 //more global constants for the game
 let adjArray = [];
 let activePiece;
+let centerPiece;
 const allSquares = [];
 //
 let waterArray = [];
@@ -134,17 +135,22 @@ const makeStone = function(elementType) {
 
 
 const getCoords = function(jqEl){
+    let x1;
+    let y1;
     if(jqEl.attr('class') === 'square'){
-        let x1 = jqEl.attr('x-coord');
-        let y1 = jqEl.attr('y-coord');
+        console.log('got here 1');;
+        x1 = jqEl.attr('x-coord');
+        y1 = jqEl.attr('y-coord');
+        console.log(x1, y1);
     }
     else{
-        let x1 = jqEl.parent().attr('x-coord');
-        let y1 = jqEl.parent().attr('y-coord');
+        console.log('got here 2');
+        x1 = jqEl.parent().attr('x-coord');
+        y1 = jqEl.parent().attr('y-coord');
     }
     return {
-        x1: x1,
-        y1: y1
+        xco: x1,
+        yco: y1
     };
 }
 
@@ -167,9 +173,8 @@ const resetActivePiece = function(){
     }
 }
 
-const getAdjacentSquares = function(){
-    if(activePiece){
-        centerPiece = activePiece;
+const getAdjacentSquares = function(inputPiece){
+        centerPiece = inputPiece;
         //x1 = getCoords(centerPiece).x1;
         //y1 = getCoords(centerPiece).y1;
         centerID = centerPiece.parent().attr('id');
@@ -181,7 +186,6 @@ const getAdjacentSquares = function(){
         }
         console.log("adjArray: ", adjArray);
         return adjArray;
-    }
 }
 
 const highlightAdjacentSquares = function(){
@@ -250,23 +254,12 @@ const clickAction = function(event){
     let isSquare = ($(event.target).attr('class') === 'square')
     let targetVar = isSquare ? $(event.target) : $(event.target).parent();
     console.log("targetVar:", targetVar);
-    console.log(targetVar.attr('x-coord'), targetVar.attr('y-coord'));
+    console.log(getCoords(targetVar));
     //go back to this if getting weird behavior...
 
     if(midAction){midActionFunction(targetVar);}
     else {endActionFunction(targetVar);}
 }
-$('.square').on('click', clickAction);
-
-
-
-
-
-
-
-
-
-
 
 const midActionFunction = function(targetVar){
     if(fireDrill){fireDrillAction(targetVar);}
@@ -276,29 +269,14 @@ const midActionFunction = function(targetVar){
 }
 
 const endActionFunction = function(targetVar){
-    //had: && targetVar.attr('class') === 'square'
-    //but it always is...
     if(activePiece){
         console.log("active piecetype: ", activePiece.attr('piecetype'));
-        
-        //case Sage:
-        //case Fire:
-        //case Water:
-        if(activePiece.attr('piecetype') === 'sage'){sageAction(targetVar);}
-        else 
-        if(activePiece.attr('piecetype') === 'fire'){fireAction(targetVar);}
-        else
+        //
+        if(activePiece.attr('piecetype') === 'sage'){sageAction(targetVar);} else 
+        if(activePiece.attr('piecetype') === 'fire'){fireAction(targetVar);} else
         if(activePiece.attr('piecetype') === 'water'){waterAction(targetVar);}
-        
-        //case Air -- nothing extra
-        //case Earth -- nothing extra
-        
-        //misc Case
-        //placeholder handler for all unspecified types of pieces
-        else {if(isEmpty(targetVar)){
-            targetVar.append(activePiece);
-            resetActivePiece();
-        }}
+        else {miscAction(targetVar)}
+        //last is placeholder handler for all unspecified types of pieces
     }
 }
 
@@ -306,7 +284,38 @@ const endActionFunction = function(targetVar){
 
 
 
+const waterAction = function(targetVar){
+    console.log('water action');
+    if(isEmpty(targetVar)){
+        //console.log('got here 3');
+        targetVar.append(activePiece);
+        waterArray.push(activePiece);
+        waterDrill = true;
+        midAction = true;
+        adjArray = getAdjacentSquares(activePiece);
+        highlightAdjacentSquares();
+        //resetActivePiece();
+    }
+}
 
+const waterDrillAction = function(targetVar){
+    if(waterArray.length === 1){
+        const targetPiece = targetVar.children().eq(0);
+        const targetType = targetPiece.attr('piecetype');
+        const dist1 = getDistance(activePiece,targetVar);
+        if(dist < 1.5 && targetType === 'water'){
+            waterArray.push(targetPiece);
+    
+        }
+    }
+
+
+
+//set watertail
+//set watercounters
+//make center square global
+//change name targetvar targetSq
+}
 
 
 
@@ -322,6 +331,13 @@ const airDrillAction = function(targetVar){
     sageAction(targetVar);
 }
 
+const miscAction = function(targetVar){
+    if(isEmpty(targetVar)){
+        targetVar.append(activePiece);
+        resetActivePiece();
+    }
+}
+
 const sageAction = function(targetVar){
     const targetType = targetVar.children().eq(0).attr('piecetype');
     if(isEmpty(targetVar) || targetType === 'air'){
@@ -332,7 +348,7 @@ const sageAction = function(targetVar){
                 targetVar.append(activePiece);
                 if(targetType === 'air'){
                     console.log('air drill');
-                    adjArray = getAdjacentSquares();
+                    adjArray = getAdjacentSquares(activePiece);
                     highlightAdjacentSquares();
                     airDrill = true;
                     midAction = true;
@@ -360,7 +376,7 @@ const fireAction = function(targetVar){
     console.log('fire action');
     if(isEmpty(targetVar)){
         targetVar.append(activePiece);
-        adjArray = getAdjacentSquares();
+        adjArray = getAdjacentSquares(activePiece);
         highlightAdjacentSquares();
         //start the fire element mid-action power sequence:
         fireDrill = true;
@@ -491,11 +507,13 @@ const drawStones = function(){
     //$('.piece').on('click', endAction);
 }
 
+$('.square').on('click', clickAction);
+
 $('#button2').on('click', drawStones);
 
 $('#button3').on('click', resetActivePiece);
 
-$('#button4').on('click', getAdjacentSquares);
+//$('#button4').on('click', getAdjacentSquares);
 
 
 
