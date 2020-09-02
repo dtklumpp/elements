@@ -25,11 +25,14 @@ let earthDrill = false;
 //more global constants for the game
 let adjArray = [];
 let activePiece;
-let centerPiece;
+//let centerPiece;
 const allSquares = [];
 //
 let waterArray = [];
-
+let waterIDs = [];
+let waterTail;
+let waterFlow = false;
+let waterCounter = 1;
 
 
 
@@ -174,7 +177,7 @@ const resetActivePiece = function(){
 }
 
 const getAdjacentSquares = function(inputPiece){
-        centerPiece = inputPiece;
+        let centerPiece = inputPiece;
         //x1 = getCoords(centerPiece).x1;
         //y1 = getCoords(centerPiece).y1;
         centerID = centerPiece.parent().attr('id');
@@ -294,19 +297,54 @@ const waterAction = function(targetVar){
         midAction = true;
         adjArray = getAdjacentSquares(activePiece);
         highlightAdjacentSquares();
+        waterTail = activePiece;
+        waterIDs.push(activePiece.parent().attr('id'));
+        waterCounter = 1;
         //resetActivePiece();
     }
 }
 
 const waterDrillAction = function(targetVar){
-    if(waterArray.length === 1){
+    const dist2 = getDistance(activePiece,targetVar);
+    if(isEmpty(targetVar)
+        && waterCounter > 0
+        && dist2 < 1.5
+        ){
+            waterflow = true;
+            resetAdjacentSquares();
+            waterCounter-- ;
+            let lastPosition;
+            let nextPosition = targetVar;
+            for(eachDrop of waterArray){
+                lastPosition = eachDrop.parent();
+                nextPosition.append(eachDrop);
+                nextPosition = lastPosition;
+            }
+        }
+    else if(waterflow === false && !(isEmpty(targetVar))){
         const targetPiece = targetVar.children().eq(0);
         const targetType = targetPiece.attr('piecetype');
-        const dist1 = getDistance(activePiece,targetVar);
-        if(dist < 1.5 && targetType === 'water'){
-            waterArray.push(targetPiece);
-    
-        }
+        const dist1 = getDistance(waterTail,targetVar);
+        if(dist1 < 1.5
+            && targetType === 'water'
+            && !(waterIDs.includes(targetVar.attr('id')))
+            ){
+                waterArray.push(targetPiece);
+                waterTail = targetPiece;
+                resetAdjacentSquares();
+                adjArray = getAdjacentSquares(waterTail);
+                highlightAdjacentSquares();
+                waterIDs.push(waterTail.parent().attr('id'));
+                waterCounter = 5;
+                //later should be waterArray.length;                
+            }
+    }
+    if(waterCounter === 0){
+        waterFlow = false;
+        waterArray = [];
+        waterIDs = [];
+        waterDrill = false;
+        midAction = false;
     }
 
 
@@ -315,6 +353,7 @@ const waterDrillAction = function(targetVar){
 //set watercounters
 //make center square global
 //change name targetvar targetSq
+//make sure tail not double back--------------
 }
 
 
