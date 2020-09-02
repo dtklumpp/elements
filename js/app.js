@@ -78,7 +78,9 @@ for(i=0; i<5; i++){
 
 
 
-
+const whoseTurn = function() {
+    return firstPlayerTurn ? 1 : 2;
+}
 
 const startAction = function(event){
     console.log('click piece');
@@ -87,9 +89,8 @@ const startAction = function(event){
         //console.log(event.target);
         //console.log($(event.target));
         let targetVar = $(event.target);
-        let whoseTurn = firstPlayerTurn ? 1 : 2;
         let pieceOwner = Number(targetVar.attr('owner'));
-        let isTurn = (whoseTurn === pieceOwner);
+        let isTurn = (whoseTurn() === pieceOwner);
         console.log('owner: ', pieceOwner);
         if(!activePiece
             && (isTurn || !pieceOwner)
@@ -527,7 +528,10 @@ const sage2 = {icon: piece2};
 
 
 
-
+const switchTurns = function() {
+    $('#moves'+whoseTurn()).text('');
+    firstPlayerTurn = !firstPlayerTurn;
+}
 
 //move this all to the top later
 
@@ -551,12 +555,14 @@ $('#4').append(randDraw);
 
 //make fxn of n?
 const drawStones = function(n){
-    console.log('clicked button 2');
+    console.log('clicked draw button');
     for(i = 0; i < n; i++){
         index1 = Math.floor(Math.random()*bag1.length);
         newStone = bag1.splice(index1,1)[0];
         newStone.css('position', 'relative');
-        $('#hand1').append(newStone);
+        //again, player class would be nice here
+        newStone.attr('owner', whoseTurn());
+        $('#hand'+whoseTurn()).append(newStone);
     }
     movesLeft = 5 - n;
     console.log('moves left: ', movesLeft);
@@ -574,13 +580,15 @@ const draw1Stones = function(){drawStones(1);}
 
 $('.square').on('click', clickAction);
 
-$('#button4').on('click', draw4Stones);
-$('#button3').on('click', draw3Stones);
+$('#button4').on('click', function(){drawStones(4);}); //ah this is how to do it
+$('#button3').on('click', draw3Stones); //does the same thing but more lines...
 $('#button2').on('click', draw2Stones);
 $('#button1').on('click', draw1Stones);
 
 
 $('#buttonUnselect').on('click', resetActivePiece);
+
+$('#switch').on('click', switchTurns);
 
 //$('#button4').on('click', getAdjacentSquares);
 
