@@ -214,10 +214,17 @@ const resetActivePiece = function(){
         switchTurns()
         //check for victory
         let currentSage = $('#Sage'+whoseTurn());
+        console.log(currentSage);
         adjArray = getAdjacentSquares(currentSage);
+        console.log(adjArray);
         let gameEnd = true;
+        console.log('game end loop)');
         for(eachSquare of adjArray){
+            console.log(eachSquare);
+            console.log(isEmpty(eachSquare));
+            console.log(eachSquare.attr('piecetype'));
             if(isEmpty(eachSquare) && (eachSquare.attr('piecetype') != 'air')){
+                console.log('make false');
                 gameEnd = false;
             }
         }
@@ -225,8 +232,10 @@ const resetActivePiece = function(){
             winner1 = 3 - (whoseTurn());
             announce('Sage trapped!  Player '+winner1+' is the winner!!!');
         }
-        console.log('here we are');
-        announce('player '+whoseTurn()+' to play!');
+        else {
+            console.log('here we are');
+            announce('player '+whoseTurn()+' to play!');
+        }
         //announce('here we are');
     
     };
