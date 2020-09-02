@@ -39,7 +39,7 @@ let firstPlayerTurn = true;
 //these should be put in the player object
 let movesLeft;
 let drewStones = false;
-
+//kind of a hacky variable here
 
 
 
@@ -158,13 +158,13 @@ const getCoords = function(jqEl){
     let x1;
     let y1;
     if(jqEl.attr('class') === 'square'){
-        console.log('got here 1');;
+        //console.log('got here 1');;
         x1 = jqEl.attr('x-coord');
         y1 = jqEl.attr('y-coord');
-        console.log(x1, y1);
+        //console.log(x1, y1);
     }
     else{
-        console.log('got here 2');
+        //console.log('got here 2');
         x1 = jqEl.parent().attr('x-coord');
         y1 = jqEl.parent().attr('y-coord');
     }
@@ -205,7 +205,7 @@ const resetActivePiece = function(){
     }
     //reset and display moves left
     //movesLeft-- ; nono only for sage action
-    console.log('here we go');
+    //console.log('here we go');
     announce('here we go');
     $('#moves'+whoseTurn()).text('moves left: '+movesLeft);
     //switch turns if out of moves
@@ -214,26 +214,27 @@ const resetActivePiece = function(){
         switchTurns()
         //check for victory
         let currentSage = $('#Sage'+whoseTurn());
-        console.log(currentSage);
+        //console.log(currentSage);
         adjArray = getAdjacentSquares(currentSage);
-        console.log(adjArray);
+        //console.log(adjArray);
         let gameEnd = true;
         console.log('game end loop)');
         for(eachSquare of adjArray){
-            console.log(eachSquare);
-            console.log(isEmpty(eachSquare));
-            console.log(eachSquare.attr('piecetype'));
+            //console.log(eachSquare);
+            //console.log(isEmpty(eachSquare));
+            //console.log(eachSquare.attr('piecetype'));
             if(isEmpty(eachSquare) && (eachSquare.attr('piecetype') != 'air')){
-                console.log('make false');
+                //console.log('make false');
                 gameEnd = false;
             }
         }
+        adjArray = [];
         if(gameEnd){
             winner1 = 3 - (whoseTurn());
             announce('Sage trapped!  Player '+winner1+' is the winner!!!');
         }
         else {
-            console.log('here we are');
+            //console.log('here we are');
             announce('player '+whoseTurn()+' to play!');
         }
         //announce('here we are');
@@ -252,7 +253,7 @@ const getAdjacentSquares = function(inputPiece){
                         adjArray.push(eachSquare);
                     }
         }
-        console.log("adjArray: ", adjArray);
+        //console.log("adjArray: ", adjArray);
         return adjArray;
 }
 
@@ -322,7 +323,7 @@ const clickAction = function(event){
     let isSquare = ($(event.target).attr('class') === 'square')
     let targetSq = isSquare ? $(event.target) : $(event.target).parent();
     console.log("targetSq:", targetSq);
-    console.log(getCoords(targetSq));
+    //console.log(getCoords(targetSq));
     //go back to this if getting weird behavior...
 
     if(midAction){midActionFunction(targetSq);}
@@ -338,12 +339,14 @@ const midActionFunction = function(targetSq){
 
 const endActionFunction = function(targetSq){
     if(activePiece){
-        console.log("active piecetype: ", activePiece.attr('piecetype'));
+        let pieceType = activePiece.attr('piecetype');
+        console.log("active piecetype: ", pieceType);
         //
-        if(activePiece.attr('piecetype') === 'sage'){sageAction(targetSq);} else 
-        if(activePiece.attr('piecetype') === 'fire'){fireAction(targetSq);} else
-        if(activePiece.attr('piecetype') === 'water'){waterAction(targetSq);}
-        else {miscAction(targetSq)}
+        if(pieceType === 'sage'){sageAction(targetSq);} else 
+        if(pieceType === 'fire'){fireAction(targetSq);} else
+        if(pieceType === 'water'){waterAction(targetSq);} else
+        if(pieceType === 'earth'){earthAction(targetSq);} else
+        {airAction(targetSq);}
         //last is placeholder handler for all unspecified types of pieces
     }
 }
@@ -441,7 +444,34 @@ const airDrillAction = function(targetSq){
     sageAction(targetSq);
 }
 
-const miscAction = function(targetSq){
+
+
+const earthAction = function(targetSq){
+    console.log('earth action');
+    earthDrill = true;
+    midAction = true;
+}
+const earthDrillAction = function(targetSq){
+    const targetType = targetSq.children().eq(0).attr('piecetype');
+    if(!(targetType === 'sage')){
+        if(!isEmpty(targetSq)){
+            console.log('earth drill action');
+            targetSq.empty();
+        }
+        earthDrill = false;
+        midAction = false;
+        targetSq.append(activePiece);
+        resetActivePiece();
+    }
+}
+
+
+//wow, that's interesting
+//these functions are running even when click to activate piece2
+//they just skp because target square isn't empty
+//should reverse order so check for active piece instead...
+const airAction = function(targetSq){
+    console.log('air action');
     if(isEmpty(targetSq)){
         targetSq.append(activePiece);
         resetActivePiece();
@@ -519,10 +549,6 @@ const fireDrillAction = function(targetSq){
     }
 }
 
-//nothing happens here
-const earthDrillAction = function(targetSq){
-    return;
-}
 
 
 
@@ -625,8 +651,8 @@ const drawStones = function(n){
         let turnVar = whoseTurn();
         let bannerVar = $('#moves'+turnVar);
         bannerVar.text('Moves Left: '+movesLeft);
-        console.log(turnVar);
-        console.log(bannerVar);
+        //console.log(turnVar);
+        //console.log(bannerVar);
         console.log('moves left: ', movesLeft);
         //omg this is so WET i just copy-pasted
         //test drop listeners
