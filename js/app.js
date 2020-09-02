@@ -262,22 +262,11 @@ const endAction = function(event){
     if(fireDrill || airDrill || waterDrill || earthDrill){
         midActionFunction(targetVar);
     }
-    else{
+
+    else {
         endActionFunction(targetVar);
     }
 
-
-    /* 
-    if(midAction){
-        midAction = false;
-        return;
-    } */
-    
-    
-    
-    
-    
-    
 }
 $('.square').on('click', endAction);
 //test drop listeners
