@@ -136,6 +136,7 @@ const makeStone = function(elementType) {
     //test add listeners
     newStone.on('click', startAction);
     newStone.on('click', clickAction);
+    newStone.attr('owner', 5); //owned by the board for now
     return newStone;
 }
 
@@ -203,8 +204,6 @@ const resetActivePiece = function(){
         };
         activePiece = null;
     }
-    //reset and display moves left
-    //movesLeft-- ; nono only for sage action
     //console.log('here we go');
     announce('here we go');
     $('#moves'+whoseTurn()).text('moves left: '+movesLeft);
@@ -212,6 +211,7 @@ const resetActivePiece = function(){
     if(!movesLeft){
         $('#hand'+whoseTurn()).empty();
         switchTurns()
+
         //check for victory
         let currentSage = $('#Sage'+whoseTurn());
         //console.log(currentSage);
@@ -223,10 +223,14 @@ const resetActivePiece = function(){
             //console.log(eachSquare);
             //console.log(isEmpty(eachSquare));
             //console.log(eachSquare.attr('piecetype'));
-            if(isEmpty(eachSquare) && (eachSquare.attr('piecetype') != 'air')){
-                //console.log('make false');
-                gameEnd = false;
-            }
+            const targetType = eachSquare.children().eq(0).attr('piecetype');
+            if(noMountain(currentSage, eachSquare)
+                &&
+                (isEmpty(eachSquare) || targetType === 'air')
+                ){
+                    //console.log('make false');
+                    gameEnd = false;
+                }
         }
         adjArray = [];
         if(gameEnd){
