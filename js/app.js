@@ -38,6 +38,7 @@ let waterCounter = 1;
 let firstPlayerTurn = true;
 //these should be put in the player object
 let movesLeft;
+let drewStones = false;
 
 
 
@@ -180,6 +181,12 @@ const getDistance = function(piece1, square1){
     //console.log("get distance: ", x1, x2, y1, y2);
     return (Math.sqrt((x1-x2)**2 + (y1-y2)**2));
 }
+
+
+
+
+
+
 
 
 //this function is conveniently doubling as the end-of-turn function
@@ -541,6 +548,8 @@ const sage2 = {icon: piece2};
 const switchTurns = function() {
     $('#moves'+whoseTurn()).text('');
     firstPlayerTurn = !firstPlayerTurn;
+    drewStones = false;
+    movesLeft = 1;
 }
 
 //move this all to the top later
@@ -566,25 +575,28 @@ $('#4').append(randDraw);
 //make fxn of n?
 const drawStones = function(n){
     console.log('clicked draw button');
-    for(i = 0; i < n; i++){
-        index1 = Math.floor(Math.random()*bag1.length);
-        newStone = bag1.splice(index1,1)[0];
-        newStone.css('position', 'relative');
-        //again, player class would be nice here
-        newStone.attr('owner', whoseTurn());
-        $('#hand'+whoseTurn()).append(newStone);
+    if(!drewStones){
+        drewStones = true;
+        for(i = 0; i < n; i++){
+            index1 = Math.floor(Math.random()*bag1.length);
+            newStone = bag1.splice(index1,1)[0];
+            newStone.css('position', 'relative');
+            //again, player class would be nice here
+            newStone.attr('owner', whoseTurn());
+            $('#hand'+whoseTurn()).append(newStone);
+        }
+        movesLeft = 5 - n;
+        let turnVar = whoseTurn();
+        let bannerVar = $('#moves'+turnVar);
+        bannerVar.text('Moves Left: '+movesLeft);
+        console.log(turnVar);
+        console.log(bannerVar);
+        console.log('moves left: ', movesLeft);
+        //omg this is so WET i just copy-pasted
+        //test drop listeners
+        //$('.piece').on('click', startAction);
+        //$('.piece').on('click', endAction);
     }
-    movesLeft = 5 - n;
-    let turnVar = whoseTurn();
-    let bannerVar = $('#moves'+turnVar);
-    bannerVar.text('Moves Left: '+movesLeft);
-    console.log(turnVar);
-    console.log(bannerVar);
-    console.log('moves left: ', movesLeft);
-    //omg this is so WET i just copy-pasted
-    //test drop listeners
-    //$('.piece').on('click', startAction);
-    //$('.piece').on('click', endAction);
 }
 
 const draw4Stones = function(){drawStones(4);}
