@@ -310,7 +310,7 @@ const waterDrillAction = function(targetVar){
         && waterCounter > 0
         && dist2 < 1.5
         ){
-            waterflow = true;
+            waterFlow = true;
             resetAdjacentSquares();
             waterCounter-- ;
             let lastPosition;
@@ -321,7 +321,7 @@ const waterDrillAction = function(targetVar){
                 nextPosition = lastPosition;
             }
         }
-    else if(waterflow === false && !(isEmpty(targetVar))){
+    else if(waterFlow === false && !(isEmpty(targetVar))){
         const targetPiece = targetVar.children().eq(0);
         const targetType = targetPiece.attr('piecetype');
         const dist1 = getDistance(waterTail,targetVar);
@@ -335,7 +335,7 @@ const waterDrillAction = function(targetVar){
                 adjArray = getAdjacentSquares(waterTail);
                 highlightAdjacentSquares();
                 waterIDs.push(waterTail.parent().attr('id'));
-                waterCounter = 5;
+                waterCounter = 7;
                 //later should be waterArray.length;                
             }
     }
@@ -345,6 +345,7 @@ const waterDrillAction = function(targetVar){
         waterIDs = [];
         waterDrill = false;
         midAction = false;
+        resetActivePiece();
     }
 
 
