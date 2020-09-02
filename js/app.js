@@ -86,11 +86,18 @@ const startAction = function(event){
     if(!midAction){
         //console.log(event.target);
         //console.log($(event.target));
-        if(!activePiece){
-            activePiece = $(event.target);
-            //activePiece.css('background-color', '#f10000')
-            activePiece.css('border', 'solid 2px red');
-        }
+        let targetVar = $(event.target);
+        let whoseTurn = firstPlayerTurn ? 1 : 2;
+        let pieceOwner = Number(targetVar.attr('owner'));
+        let isTurn = (whoseTurn === pieceOwner);
+        console.log('owner: ', pieceOwner);
+        if(!activePiece
+            && (isTurn || !pieceOwner)
+            ){
+                activePiece = $(event.target);
+                //activePiece.css('background-color', '#f10000')
+                activePiece.css('border', 'solid 2px red');
+            }
     }
 }
 
@@ -105,12 +112,13 @@ const startAction = function(event){
 
 
 
-const makeSage = function(color1) {
+const makeSage = function(color1, playerVar) {
     const newPiece = $('<div/>').addClass('piece sage');
     newPiece.attr('piecetype', 'sage');
     newPiece.attr('base-color', color1);
     newPiece.css('background-color', color1);
     newPiece.css('z-index', 1);
+    newPiece.attr('owner', playerVar);
     //test add listeners
     newPiece.on('click', startAction);
     newPiece.on('click', clickAction);
@@ -491,8 +499,8 @@ const earthDrillAction = function(targetSq){
 
 
 //make the sages
-const piece1 = makeSage('black');
-const piece2 = makeSage('white');
+const piece1 = makeSage('black', 1);
+const piece2 = makeSage('white', 2);
 
 //put them in the corners to start
 $('#24').append(piece1);
