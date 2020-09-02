@@ -1,6 +1,10 @@
 body {
 }
 
+button {
+    margin: 10px 2px;
+}
+
 #play-area {
     display: flex;
     position: relative;
@@ -23,7 +27,7 @@ body {
 
 #panel {
     width: 40vh;
-    height: 70vh;
+    height: 80vh;
     background-color: #00a100;
     display: flex;
     position: relative;
@@ -34,19 +38,23 @@ body {
     width: 40vh;
     height: 5vh;
     background-color: #818191;
-    display: flex;
     position: relative;
-    flex-wrap: wrap;
+    padding: 5px;
 }
 
 .hand {
+    display: flex;
+    flex-wrap: wrap;
     height: 20vh;
 }
 
-.moves {
+.moves, .hand {
     color: #a03333;
 }
 
+.moves {
+    height: 10vh;
+}
 
 .piece {
     width: 7vh;
@@ -67,18 +75,23 @@ body {
     /* for now gonna use 80px */
     /* prob better way, append to square itself */
     /* making bit smaller so not as bad */
+    font-size: 48px;
+    text-align: center;
+    line-height: 100%;
+    text-
 }
 
 #announcements {
     width: 420px;
-    height: 5vh;
+    height: 10vh;
     background-color: #0000a1;
     color: red;
     font-size: 24px;
+    padding: 5px;
 }
 
 #metric {
-    width: 420px;
+    width: 418px;
     height: 5vh;
     background-color: #c1c1c1;
     color: red;

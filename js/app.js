@@ -581,15 +581,24 @@ const fireDrillAction = function(targetSq){
 
 
 
-
+let middleNum = Math.floor(allSquares.length/2);
+let rowLen = Math.sqrt(allSquares.length);
+let startP1 = middleNum - rowLen;
+let startP2 = middleNum + rowLen;
 
 //make the sages
 const piece1 = makeSage('black', 1);
 const piece2 = makeSage('white', 2);
 
 //put them in the corners to start
-$('#24').append(piece1);
-$('#0').append(piece2);
+$('#'+startP1).append(piece1);
+$('#'+startP2).append(piece2);
+
+piece1.css('color', 'white');
+
+//just one way to identify:
+//piece1.text('1');
+//piece2.text('2');
 
 //eventually i want all pieces to be objects with..
 //..an "icon" representing them in the DOM
@@ -635,9 +644,18 @@ for(eachType in elements1){
         bag1.push(stone1);
     }
 }
+
+
+//draw random starting stone
+//turn off for now -- bring back when better designed...
+/* 
 indexRand = Math.floor(Math.random()*bag1.length)
 const randDraw = bag1.splice(indexRand, 1)[0];
-$('#4').append(randDraw);
+$('#'+middleNum).append(randDraw);
+ */
+
+
+
 
 //make fxn of n?
 const drawStones = function(n){
@@ -683,6 +701,8 @@ $('#button1').on('click', draw1Stones);
 $('#buttonUnselect').on('click', resetActivePiece);
 
 $('#switch').on('click', switchTurns);
+
+announce('GAME START!');
 
 //$('#button4').on('click', getAdjacentSquares);
 
