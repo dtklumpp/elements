@@ -169,7 +169,10 @@ button:hover {
     background-color: #797d62;
     text-align: center;
     line-height: 100%;
+}
 
+.active {
+    background-color: #f1dca7;
 }
     
     

@@ -642,9 +642,12 @@ const sage2 = {icon: piece2};
 
 const switchTurns = function() {
     $('#moves'+whoseTurn()).text('');
+    $('.'+whoseTurn()).removeClass('active')
     firstPlayerTurn = !firstPlayerTurn;
+    $('.'+whoseTurn()).addClass('active')
     drewStones = false;
     movesLeft = 1;
+    
 }
 
 //move this all to the top later
@@ -723,6 +726,8 @@ $('#buttonUnselect').on('click', resetActivePiece);
 $('#switch').on('click', switchTurns);
 
 announce('GAME START!');
+$('.p'+whoseTurn()).addClass('active')
+
 
 //$('#button4').on('click', getAdjacentSquares);
 
