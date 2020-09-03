@@ -382,6 +382,7 @@ const waterAction = function(targetSq){
     if(isEmpty(targetSq)){
         //console.log('got here 3');
         targetSq.append(activePiece);
+        activePiece.removeClass('panel-stone');
         waterArray.push(activePiece);
         waterDrill = true;
         midAction = true;
@@ -480,6 +481,7 @@ const earthDrillAction = function(targetSq){
         earthDrill = false;
         midAction = false;
         targetSq.append(activePiece);
+        activePiece.removeClass('panel-stone');
         resetActivePiece();
     }
 }
@@ -493,6 +495,7 @@ const airAction = function(targetSq){
     console.log('air action');
     if(isEmpty(targetSq)){
         targetSq.append(activePiece);
+        activePiece.removeClass('panel-stone');
         resetActivePiece();
     }
 }
@@ -537,6 +540,7 @@ const fireAction = function(targetSq){
     console.log('fire action');
     if(isEmpty(targetSq)){
         targetSq.append(activePiece);
+        activePiece.removeClass('panel-stone');
         adjArray = getAdjacentSquares(activePiece);
         highlightAdjacentSquares();
         //start the fire element mid-action power sequence:
@@ -683,6 +687,7 @@ const drawStones = function(n){
             newStone.css('position', 'relative');
             //again, player class would be nice here
             newStone.attr('owner', whoseTurn());
+            newStone.addClass('panel-stone');
             $('#hand'+whoseTurn()).append(newStone);
         }
         movesLeft = 5 - n;

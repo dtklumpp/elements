@@ -77,9 +77,10 @@ button:hover {
     line-height: 100%;
 }
 
-.piece:hover {
+.panel-stone:hover {
     filter: brightness(120%);
 }
+
 
 .sage:hover {
     border: solid 2px brown;
