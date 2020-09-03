@@ -82,7 +82,7 @@ button:hover {
 }
 
 
-.sage:hover {
+.active-sage:hover {
     border: solid 2px brown;
     /* background-color: grey; */
 }
@@ -95,6 +95,9 @@ button:hover {
     border: dotted 2px red;
 }
 
+.sage {
+    
+}
 
 
 
@@ -169,10 +172,12 @@ button:hover {
     background-color: #797d62;
     text-align: center;
     line-height: 100%;
+    border: solid 2px black;
 }
 
 .active {
-    background-color: #f1dca7;
+    /* background-color: #f1dca7; */
+    background-color: #efefd0;
 }
     
     

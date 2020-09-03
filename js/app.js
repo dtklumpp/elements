@@ -128,6 +128,7 @@ const makeSage = function(color1, playerVar) {
     newPiece.css('z-index', 1);
     newPiece.attr('owner', playerVar);
     newPiece.attr('id', 'Sage'+playerVar)
+    newPiece.addClass('sage');
     //test add listeners
     newPiece.on('click', startAction);
     newPiece.on('click', clickAction);
@@ -608,6 +609,8 @@ let startP2 = middleNum + rowLen;
 //make the sages
 const piece1 = makeSage('black', 1);
 const piece2 = makeSage('white', 2);
+piece1.addClass('sage1');
+piece2.addClass('sage2');
 
 //put them in the corners to start
 $('#'+startP1).append(piece1);
@@ -642,9 +645,11 @@ const sage2 = {icon: piece2};
 
 const switchTurns = function() {
     $('#moves'+whoseTurn()).text('');
-    $('.'+whoseTurn()).removeClass('active')
+    $('.p'+whoseTurn()).removeClass('active')
+    $('.sage'+whoseTurn()).removeClass('active-sage');
     firstPlayerTurn = !firstPlayerTurn;
-    $('.'+whoseTurn()).addClass('active')
+    $('.p'+whoseTurn()).addClass('active')
+    $('.sage'+whoseTurn()).addClass('active-sage');
     drewStones = false;
     movesLeft = 1;
     
@@ -727,6 +732,8 @@ $('#switch').on('click', switchTurns);
 
 announce('GAME START!');
 $('.p'+whoseTurn()).addClass('active')
+$('.sage'+whoseTurn()).addClass('active-sage');
+
 
 
 //$('#button4').on('click', getAdjacentSquares);
