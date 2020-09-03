@@ -508,7 +508,13 @@ const sageAction = function(targetSq){
         console.log("distance: ", dist1);
         if(dist1 < 1.5){
             if(noMountain(activePiece,targetSq)){
-                targetSq.append(activePiece);
+                //well this didn't work
+                //activePiece.animate([{transform: 'translateY(30px)'}, {transform: 'translateX(30px)'}], {duration: 1000});
+                let interval = 500;
+                activePiece.animate({top: '-=70px'}, interval);
+                setTimeout(function(){targetSq.append(activePiece);}, interval+100);
+                //this works sorta but would have to write new append fxn for everything...
+                //targetSq.append(activePiece);
                 if(targetType === 'air'){
                     console.log('air drill');
                     resetAdjacentSquares();
