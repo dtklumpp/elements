@@ -512,12 +512,16 @@ const sageAction = function(targetSq){
             if(noMountain(activePiece,targetSq)){
                 //well this didn't work
                 //activePiece.animate([{transform: 'translateY(30px)'}, {transform: 'translateX(30px)'}], {duration: 1000});
-                //let interval = 500;
-                //activePiece.animate({top: '-=70px'}, interval);
-                //setTimeout(function(){targetSq.append(activePiece);}, interval+100);
+                //
+                let interval = 500;
+                let sagePiece = activePiece;
+                activePiece.animate({top: '-=70px'}, interval);
+                setTimeout(function(){targetSq.append(sagePiece);}, interval+1);
+                sagePiece.animate({top: '+=70px'}, 1);
                 //this works sorta but would have to write new append fxn for everything...
-                //also doesn't update position of piece for some reason...
-                targetSq.append(activePiece);
+                //or would i?
+                //
+                //targetSq.append(activePiece);
                 if(targetType === 'air'){
                     console.log('air drill');
                     resetAdjacentSquares();
