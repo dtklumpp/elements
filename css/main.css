@@ -1,3 +1,7 @@
+* {
+    /* box-sizing: border-box; */
+}
+
 body {
     font-family: 'georgia', serif;
     display: flex;
@@ -51,6 +55,7 @@ button:hover {
     margin: 0 5px;
     background-color: #f1f1f1;
     box-shadow: 1px 1px black;
+    box-sizing: border-box;
 }
 
 .piece {
