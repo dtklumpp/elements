@@ -9,58 +9,52 @@
     <title>Elements</title>
 </head>
 <body>
-    <!-- test button -->
-    <!-- <button id="button1">Button 1</button> -->
-    <!-- draw stones -->
-    <!-- reset Active -->
-
-    <!-- this button kinda works i think -->
-    <!-- <button id="buttonUnselect">Unselect</button> -->
-
-    <button id="button4">Draw 4 Stones</button>
-    <button id="button3">Draw 3</button>
-    <button id="button2">Draw 2</button>
-    <button id="button1">Draw 1</button>
-
-    <!-- this button should basically work -->
-    <!-- <button id="switch">Switch Turns</button> -->
-
+    <div id="game-area">
+        <!-- test button -->
+        <!-- <button id="button1">Button 1</button> -->
+        <!-- draw stones -->
+        <!-- reset Active -->
+    
+        <!-- this button kinda works i think -->
+        <!-- <button id="buttonUnselect">Unselect</button> -->
+    
+        
+        <!-- this button should basically work -->
+        <!-- <button id="switch">Switch Turns</button> -->
+        
         <!-- show Adjacent -->
-    <!-- <button id="button4">Button 4</button> -->
+        <!-- <button id="button4">Button 4</button> -->
+        
+        <div id="play-area">
+            <div id="left">
+                <div class="buttons">
+                    <button id="button4">Draw 4 Stones</button>
+                    <button id="button3">Draw 3</button>
+                    <button id="button2">Draw 2</button>
+                    <button id="button1">Draw 1</button>                    
+                </div>
 
-
-    <div id="play-area">
-        <div id="left">
-            <div class="emily"></div>
-            <div id="board"></div>
-            <div class="emily"></div>
-        </div>
-        <div id="panel">
-            <!-- <div class="scoreboard"></div> -->
-            <div id="announcements"></div>
-            <div class="moves" id="moves1">
-                <p>Moves Left:</p>
+                <div class="emily"></div>
+                <div id="board"></div>
+                <div class="emily"></div>
             </div>
-            <div class="hand-text">
-                <p>Player One Hand of Stones:</p>
-
-            </div>
-            <div class="hand" id="hand1">
-
-            </div>
-            <div class="hand-text">
-                <p>Player Two Hand of Stones:</p>
-
-            </div>
-            <div class="hand" id="hand2">
-
-            </div>
-            <div class="moves" id="moves2">
-                <p>Moves Left:</p>
+            <div id="panel">
+                <!-- <div class="scoreboard"></div> -->
+                <div id="announcements"></div>
+                <div class="moves" id="moves1">Moves Left:</div>
+                <div class="hand-text">Player One Hand of Stones:</div>
+                <div class="hand" id="hand1"></div>
+                <div class="hand-text">Player Two Hand of Stones:</div>
+                <div class="hand" id="hand2">
+    
+                </div>
+                <div class="moves" id="moves2">Moves Left:
+                </div>
             </div>
         </div>
+        
+        <!-- <div id="announcements"></div> -->
+        <div id="metric"></div>
     </div>
-    <!-- <div id="announcements"></div> -->
-    <div id="metric"></div>
 </body>
 </html>

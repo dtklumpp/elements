@@ -1,10 +1,25 @@
 body {
     font-family: 'georgia', serif;
-    background-color: #f1f1f1;
+    display: flex;
+    justify-content: center;
+}
+
+#game-area {
+    /* background-color: #f1f1f1; */
+    background-color: #9b9b7a;
+
+    padding: 10px;
+    width: 96vh;
+
 }
 
 button {
     margin: 10px 2px;
+    background-color: #d08c60;
+}
+
+button:hover {
+    filter: brightness(110%);
 }
 
 #play-area {
@@ -38,48 +53,6 @@ button {
     box-shadow: 1px 1px black;
 }
 
-#panel {
-    width: 40vh;
-    height: 70.5vh;
-    background-color: #9b9b7a;
-    display: flex;
-    position: relative;
-    flex-wrap: wrap;
-    /* margin: 0 1vh; */
-    box-shadow: 1px 1px black;
-    border: solid 1px black;
-}
-
-.hand, .moves, .scoreboard, .hand-text {
-    width: 40vh;
-    height: 5vh;
-    background-color: #797d62;
-    position: relative;
-    /* padding: 5px; */
-}
-
-
-.hand {
-    display: flex;
-    flex-wrap: wrap;
-    height: 15vh;
-    align-items: center;
-}
-
-.hand p {
-    width: 100%;
-}
-
-.moves, .hand {
-    color: #a03333;
-}
-
-.moves, .hand-text {
-    height: 4vh;
-    line-height: 100%;
-    font-size: 18px;
-}
-
 .piece {
     width: 7vh;
     height: 7vh;
@@ -102,8 +75,88 @@ button {
     font-size: 48px;
     text-align: center;
     line-height: 100%;
-    text-
 }
+
+.piece:hover {
+    filter: brightness(120%);
+}
+
+.sage:hover {
+    border: solid 2px brown;
+    /* background-color: grey; */
+}
+
+.selected {
+    border: solid 2px red;
+}
+
+.adjacent {
+    border: dotted 2px red;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+#panel {
+    width: 40vh;
+    height: 76vh;
+    background-color: #9b9b7a;
+    display: flex;
+    position: relative;
+    flex-wrap: wrap;
+    /* margin: 0 1vh; */
+    box-shadow: 1px 1px black;
+    border: solid 1px black;
+}
+
+.hand, .moves, .scoreboard, .hand-text {
+    width: 40vh;
+    height: 5vh;
+    background-color: #797d62;
+    position: relative;
+    /* padding: 5px; */
+    margin: 0 1vh;
+    padding: 0 1vh;
+}
+
+.hand {
+    display: flex;
+    flex-wrap: wrap;
+    height: 15vh;
+    align-items: center;
+}
+
+.hand p {
+    width: 100%;
+}
+
+.moves, .hand, .hand-text {
+    color: #a03333;
+}
+
+.moves, .hand-text {
+    height: 4vh;
+    /* line-height: 100%; */
+    font-size: 18px;
+}
+    
+    
+    /* 
+    #metric {
+        width: 415px;
+        height: 5vh;
+        background-color: #c1c1c1;
+        color: red;
+        font-size: 24px;
+    } */
 
 #announcements {
     width: 420px;
@@ -116,17 +169,7 @@ button {
     /* justify-content: center; */
     text-transform: uppercase;
 }
-
-
-/* 
-#metric {
-    width: 415px;
-    height: 5vh;
-    background-color: #c1c1c1;
-    color: red;
-    font-size: 24px;
-} */
-
+    
 .emily {
     width: 54vh;
     height: 7vh;
@@ -136,26 +179,3 @@ button {
     border: solid 1px black;
 
 }
-
-.piece:hover {
-    filter: brightness(120%);
-}
-
-.sage:hover {
-    border: solid 2px brown;
-    /* background-color: grey; */
-}
-
-
-
-
-
-
-.selected {
-    border: solid 2px red;
-}
-
-.adjacent {
-    border: dotted 2px red;
-}
-
