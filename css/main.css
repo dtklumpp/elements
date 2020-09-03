@@ -24,6 +24,8 @@ button {
     padding: 1vh 0;
     margin: 1vh 1vh 1vh 0;
     /* border: solid 5px #d08c60; */
+    box-shadow: 2px 2px black;
+    border: solid 1px black;
 }
 
 .square {
@@ -32,38 +34,49 @@ button {
     border: solid 1px black;
     margin: 0 5px;
     background-color: #f1f1f1;
+    box-shadow: 1px 1px black;
 }
 
 #panel {
     width: 40vh;
-    height: 70vh;
+    height: 70.5vh;
     background-color: #9b9b7a;
     display: flex;
     position: relative;
     flex-wrap: wrap;
     /* margin: 0 1vh; */
+    box-shadow: 2px 2px black;
+    border: solid 1px black;
 }
 
-.hand, .moves, .scoreboard {
+.hand, .moves, .scoreboard, .hand-text {
     width: 40vh;
     height: 5vh;
     background-color: #797d62;
     position: relative;
-    padding: 5px;
+    /* padding: 5px; */
 }
+
 
 .hand {
     display: flex;
     flex-wrap: wrap;
-    height: 10vh;
+    height: 15vh;
+    align-items: center;
+}
+
+.hand p {
+    width: 100%;
 }
 
 .moves, .hand {
     color: #a03333;
 }
 
-.moves {
-    height: 10vh;
+.moves, .hand-text {
+    height: 4vh;
+    line-height: 100%;
+    font-size: 18px;
 }
 
 .piece {
@@ -118,6 +131,9 @@ button {
     height: 7vh;
     margin: 1vh 0;
     background-color: #1b263b;
+    box-shadow: 2px 2px black;
+    border: solid 1px black;
+
 }
 
 .piece:hover {
@@ -141,3 +157,4 @@ button {
 .adjacent {
     border: dotted 2px red;
 }
+
