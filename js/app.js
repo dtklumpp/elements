@@ -40,7 +40,10 @@ let firstPlayerTurn = true;
 let movesLeft;
 let drewStones = false;
 //kind of a hacky variable here
+//what was here??
 
+//anyway this one is for animation
+let isAnimate = true;
 
 
 
@@ -513,15 +516,30 @@ const sageAction = function(targetSq){
                 //well this didn't work
                 //activePiece.animate([{transform: 'translateY(30px)'}, {transform: 'translateX(30px)'}], {duration: 1000});
                 //
-                let interval = 500;
-                let sagePiece = activePiece;
-                activePiece.animate({top: '-=70px'}, interval);
-                setTimeout(function(){targetSq.append(sagePiece);}, interval+1);
-                sagePiece.animate({top: '+=70px'}, 1);
-                //this works sorta but would have to write new append fxn for everything...
-                //or would i?
-                //
-                //targetSq.append(activePiece);
+                //animation working!  if you want it...
+                if(isAnimate){
+                    let xdif = getCoords(targetSq).xco - getCoords(activePiece).xco;
+                    let ydif = getCoords(targetSq).yco - getCoords(activePiece).yco;
+                    let xpix = xdif * 70;
+                    let ypix = ydif * 70;
+                    let interval = 300;
+                    let sagePiece = activePiece;
+                    sagePiece.animate(
+                        {top: '+='+ypix,
+                        left: '+='+xpix},
+                        interval);
+                    setTimeout(function(){targetSq.append(sagePiece);}, interval);
+                    sagePiece.animate(
+                        {top: '-='+ypix,
+                        left: '-='+xpix}, 
+                        0);
+                        //this works sorta but would have to write new append fxn for everything...
+                        //or would i?
+                        //
+                }
+                else{
+                    targetSq.append(activePiece);
+                }
                 if(targetType === 'air'){
                     console.log('air drill');
                     resetAdjacentSquares();
