@@ -1,4 +1,5 @@
 body {
+    font-family: 'georgia', serif;
 }
 
 button {
@@ -11,11 +12,17 @@ button {
 }
 
 #board {
-    width: 55vh;
-    height: 52vh;
-    background-color: #f1f1f1;
+    width: 54vh;
+    height: 51vh;
+    background-color: #d08c60;
+    /* background-color: #1b263b; */
+    /* background-color: #f1f1f1; */
     display: flex;
     flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    padding: 1vh 0;
+    margin: 1vh 1vh 1vh 0;
 }
 
 .square {
@@ -23,21 +30,23 @@ button {
     height: 9vh;
     border: solid 1px black;
     margin: 0 5px;
+    background-color: #f1f1f1;
 }
 
 #panel {
     width: 40vh;
-    height: 80vh;
-    background-color: #00a100;
+    height: 70vh;
+    background-color: #9b9b7a;
     display: flex;
     position: relative;
     flex-wrap: wrap;
+    /* margin: 0 1vh; */
 }
 
 .hand, .moves, .scoreboard {
     width: 40vh;
     height: 5vh;
-    background-color: #818191;
+    background-color: #797d62;
     position: relative;
     padding: 5px;
 }
@@ -45,7 +54,7 @@ button {
 .hand {
     display: flex;
     flex-wrap: wrap;
-    height: 20vh;
+    height: 10vh;
 }
 
 .moves, .hand {
@@ -83,18 +92,33 @@ button {
 
 #announcements {
     width: 420px;
-    height: 10vh;
-    background-color: #0000a1;
-    color: red;
-    font-size: 24px;
+    height: 13vh;
+    background-color: #415a77;
+    color: #ffcb69;
+    font-size: 42px;
     padding: 5px;
+    text-align: center;
+    /* justify-content: center; */
+    text-transform: uppercase;
 }
 
+
+/* 
 #metric {
-    width: 418px;
+    width: 415px;
     height: 5vh;
     background-color: #c1c1c1;
     color: red;
     font-size: 24px;
+} */
+
+.emily {
+    width: 54vh;
+    height: 7vh;
+    margin: 1vh 0;
+    background-color: #1b263b;
 }
 
+.piece:hover {
+    filter: brightness(120%);
+}

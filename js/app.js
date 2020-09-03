@@ -47,10 +47,10 @@ let drewStones = false;
 
 //make elements
 const elements1 = {
-    water: {name: 'water', color: 'blue'},
-    air: {name: 'air', color: 'grey'},
-    earth: {name: 'earth', color: 'brown'},
-    fire: {name: 'fire', color: 'orange'}
+    water: {name: 'water', color: '#778da9'},
+    air: {name: 'air', color: '#ecf8f8'},
+    earth: {name: 'earth', color: '#997b66'},
+    fire: {name: 'fire', color: '#ffcb69'}
 }
 
 
@@ -493,6 +493,7 @@ const sageAction = function(targetSq){
                 targetSq.append(activePiece);
                 if(targetType === 'air'){
                     console.log('air drill');
+                    resetAdjacentSquares();
                     adjArray = getAdjacentSquares(activePiece);
                     highlightAdjacentSquares();
                     airDrill = true;
