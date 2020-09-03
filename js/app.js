@@ -615,7 +615,17 @@ piece2.addClass('sage2');
 //put them in the corners to start
 $('#'+startP1).append(piece1);
 $('#'+startP2).append(piece2);
+//piece1.draggable();
+//piece2.draggable();
 
+$(function() {
+    $('.sage').draggable();
+});
+
+
+
+
+//piece 1 gotta have white text if black background
 piece1.css('color', 'white');
 
 //just one way to identify:
