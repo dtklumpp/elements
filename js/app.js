@@ -528,11 +528,14 @@ const sageAction = function(targetSq){
                         {top: '+='+ypix,
                         left: '+='+xpix},
                         interval);
+                    setTimeout(function(){sagePiece.hide();}, interval-1);
                     setTimeout(function(){targetSq.append(sagePiece);}, interval);
                     sagePiece.animate(
                         {top: '-='+ypix,
                         left: '-='+xpix}, 
                         0);
+                    setTimeout(function(){sagePiece.show();}, interval);
+
                         //this works sorta but would have to write new append fxn for everything...
                         //or would i?
                         //
