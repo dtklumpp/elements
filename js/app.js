@@ -43,7 +43,7 @@ let drewStones = false;
 //what was here??
 
 //anyway this one is for animation
-let isAnimate = true;
+let isAnimate = false;
 
 
 
@@ -686,6 +686,16 @@ const sage2 = {icon: piece2};
 
 
 
+const toggleAnimate = function() {
+    if(isAnimate){
+        $('#animate').text('animate');
+    }
+    else{
+        $('#animate').text('de-animate');
+    }
+    isAnimate = !isAnimate;
+    console.log(isAnimate);
+}
 
 
 const switchTurns = function() {
@@ -779,7 +789,7 @@ announce('GAME START!');
 $('.p'+whoseTurn()).addClass('active')
 $('.sage'+whoseTurn()).addClass('active-sage');
 
-
+$('#animate').on('click', toggleAnimate);
 
 //$('#button4').on('click', getAdjacentSquares);
 

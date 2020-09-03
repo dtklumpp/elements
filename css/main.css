@@ -13,7 +13,7 @@ body {
     background-color: #9b9b7a;
 
     padding: 10px;
-    width: 96vh;
+    width: 98vh;
 
 }
 
@@ -30,6 +30,11 @@ button:hover {
     display: flex;
     position: relative;
 }
+
+#left {
+    width: 58vh;
+}
+
 
 #board {
     width: 54vh;
