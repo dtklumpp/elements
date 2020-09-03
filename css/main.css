@@ -1,5 +1,6 @@
 body {
     font-family: 'georgia', serif;
+    background-color: #f1f1f1;
 }
 
 button {
@@ -24,7 +25,7 @@ button {
     padding: 1vh 0;
     margin: 1vh 1vh 1vh 0;
     /* border: solid 5px #d08c60; */
-    box-shadow: 2px 2px black;
+    box-shadow: 1px 1px black;
     border: solid 1px black;
 }
 
@@ -45,7 +46,7 @@ button {
     position: relative;
     flex-wrap: wrap;
     /* margin: 0 1vh; */
-    box-shadow: 2px 2px black;
+    box-shadow: 1px 1px black;
     border: solid 1px black;
 }
 
@@ -131,7 +132,7 @@ button {
     height: 7vh;
     margin: 1vh 0;
     background-color: #1b263b;
-    box-shadow: 2px 2px black;
+    box-shadow: 1px 1px black;
     border: solid 1px black;
 
 }
