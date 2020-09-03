@@ -99,7 +99,12 @@ const startAction = function(event){
             ){
                 activePiece = $(event.target);
                 //activePiece.css('background-color', '#f10000')
-                activePiece.css('border', 'solid 2px red');
+
+
+
+
+                activePiece.addClass('selected');
+                //activePiece.css('border', 'solid 2px red');
             }
     }
 }
@@ -198,7 +203,11 @@ const resetActivePiece = function(){
     if(activePiece){
         //base1 = activePiece.attr('base-color');
         //activePiece.css('background-color', base1);
-        activePiece.css('border', 'solid 1px black');
+
+        //test, put back later
+        //activePiece.css('border', 'solid 1px black');
+        activePiece.removeClass('selected');
+
 
         if(activePiece.attr('piecetype') != 'sage'){
             activePiece.attr('owner', 5); //there will never be a player 5---5 is the board itself
