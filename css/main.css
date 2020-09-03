@@ -137,3 +137,7 @@ button {
 .selected {
     border: solid 2px red;
 }
+
+.adjacent {
+    border: dotted 2px red;
+}

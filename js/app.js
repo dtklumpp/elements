@@ -215,7 +215,7 @@ const resetActivePiece = function(){
         activePiece = null;
     }
     //console.log('here we go');
-    announce('here we go');
+    //announce('here we go');
     $('#moves'+whoseTurn()).text('moves left: '+movesLeft);
     //switch turns if out of moves
     if(!movesLeft){
@@ -273,13 +273,17 @@ const getAdjacentSquares = function(inputPiece){
 
 const highlightAdjacentSquares = function(){
     for(eachSquare of adjArray){
-        eachSquare.css('border', 'dotted 2px red');
+
+        eachSquare.addClass('adjacent');
+        //eachSquare.css('border', 'dotted 2px red');
     }
 }
 
 const resetAdjacentSquares = function(){
     for(eachSquare of adjArray){
-        eachSquare.css('border', 'solid 1px black');
+
+        eachSquare.removeClass('adjacent');
+        //eachSquare.css('border', 'solid 1px black');
     }
     adjArray = [];
 }
@@ -334,7 +338,7 @@ const clickAction = function(event){
     console.log('end action begin');
 
     //more complicated so can click on pieces as squares too...
-    let isSquare = ($(event.target).attr('class') === 'square')
+    let isSquare = ($(event.target).hasClass('square'));
     let targetSq = isSquare ? $(event.target) : $(event.target).parent();
     console.log("targetSq:", targetSq);
     //console.log(getCoords(targetSq));
@@ -345,6 +349,7 @@ const clickAction = function(event){
 }
 
 const midActionFunction = function(targetSq){
+    console.log('midaction');
     if(fireDrill){fireDrillAction(targetSq);}
     if(airDrill){airDrillAction(targetSq);}
     if(waterDrill){waterDrillAction(targetSq);}
