@@ -216,7 +216,7 @@ const resetActivePiece = function(){
     }
     //console.log('here we go');
     //announce('here we go');
-    $('#moves'+whoseTurn()).text('moves left: '+movesLeft);
+    $('#moves'+whoseTurn()).text(movesLeft);
     //switch turns if out of moves
     if(!movesLeft){
         $('#hand'+whoseTurn()).empty();
@@ -693,7 +693,7 @@ const drawStones = function(n){
         movesLeft = 5 - n;
         let turnVar = whoseTurn();
         let bannerVar = $('#moves'+turnVar);
-        bannerVar.text('Moves Left: '+movesLeft);
+        bannerVar.text(movesLeft);
         //console.log(turnVar);
         //console.log(bannerVar);
         console.log('moves left: ', movesLeft);

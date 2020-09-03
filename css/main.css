@@ -118,8 +118,13 @@ button:hover {
     border: solid 1px black;
 }
 
+.move-group {
+    display: flex;
+    align-items: center;
+}
+
 .hand, .moves, .scoreboard, .hand-text {
-    width: 40vh;
+    /* width: 40vh; */
     height: 5vh;
     background-color: #797d62;
     position: relative;
@@ -129,17 +134,21 @@ button:hover {
 }
 
 .hand {
+    width: 40vh;
     display: flex;
     flex-wrap: wrap;
     height: 15vh;
     align-items: center;
+    border: 1px solid black;
 }
 
-.hand p {
+
+/* .hand p {
     width: 100%;
-}
+} */
 
-.moves, .hand, .hand-text {
+
+.moves, .hand, .hand-text, .move-count {
     color: #a03333;
 }
 
@@ -147,6 +156,20 @@ button:hover {
     height: 4vh;
     /* line-height: 100%; */
     font-size: 18px;
+    border-radius: 5px;
+    border: solid 1px black;
+    box-shadow: 1px 1px black;
+}
+
+.move-count {
+    height: 6vh;
+    width: 6vh;
+    font-size: 36px;
+    color: black;
+    background-color: #797d62;
+    text-align: center;
+    line-height: 100%;
+
 }
     
     
