@@ -164,7 +164,7 @@ const makeStone = function(elementType) {
 const getCoords = function(jqEl){
     let x1;
     let y1;
-    if(jqEl.attr('class') === 'square'){
+    if(jqEl.hasClass('square')){
         //console.log('got here 1');;
         x1 = jqEl.attr('x-coord');
         y1 = jqEl.attr('y-coord');
