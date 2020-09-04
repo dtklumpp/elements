@@ -242,6 +242,14 @@ button:hover {
 
 }
 
+.toptitle {
+    color: #ffcb69;
+    font-size: 30px;
+    text-align: center;
+    line-height: 7vh;
+    vertical-align: middle;
+
+}
 
 
 /* quick from internet for flash */
