@@ -422,22 +422,39 @@ const endActionFunction = function(targetSq){
 
 //oh one stone is only flowing 1 score --- good!  but why?
 
+//wanna do this if no adjacent (aka air drill)
+// targetSq.append(activePiece);
+// activePiece.removeClass('panel-stone');
+// resetActivePiece();
+
+
+
+
+
+
+
+
 const waterAction = function(targetSq){
     console.log('water action');
     if(isEmpty(targetSq)){
         //console.log('got here 3');
-        targetSq.append(activePiece);
-        activePiece.removeClass('panel-stone');
-        waterArray.push(activePiece);
-        waterDrill = true;
-        midAction = true;
-        adjArray = getAdjacentSquares(activePiece);
-        highlightAdjacentSquares();
-        waterTail = activePiece;
-        waterIDs.push(activePiece.parent().attr('id'));
-        waterCounter = 1;
-        //resetActivePiece();
-        announce('Flow, Water!!');
+        if(checkRiver(targetSq)){
+            targetSq.append(activePiece);
+            activePiece.removeClass('panel-stone');
+            waterArray.push(activePiece);
+            waterDrill = true;
+            midAction = true;
+            adjArray = getAdjacentSquares(activePiece);
+            highlightAdjacentSquares();
+            waterTail = activePiece;
+            waterIDs.push(activePiece.parent().attr('id'));
+            waterCounter = 1;
+            //resetActivePiece();
+            announce('Flow, Water!!');
+        }
+        else{
+            airAction(targetSq);
+        }
     }
 }
 
@@ -501,6 +518,17 @@ const resetWaterArray = function() {
     for(eachDrop of waterArray){
         eachDrop.css('background-color', '#2d00f7');
     }
+}
+
+const checkRiver = function(targetSq){
+    adjArray = getAdjacentSquares(targetSq);
+    let isRiver = false;
+    for(eachSquare of adjArray){
+        const targetType = eachSquare.children().eq(0).attr('piecetype');
+        if(targetType === 'water'){isRiver = true;}
+    }
+    adjArray = [];
+    return isRiver;
 }
 
 
