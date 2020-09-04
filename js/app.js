@@ -53,12 +53,31 @@ let isAnimate = false;
 
 
 //make elements
+
+//test new element colors
+
 const elements1 = {
-    water: {name: 'water', color: '#778da9'},
+    water: {name: 'water', color: '#2d00f7'},
     air: {name: 'air', color: '#ecf8f8'},
     earth: {name: 'earth', color: '#997b66'},
-    fire: {name: 'fire', color: '#ffcb69'}
+    fire: {name: 'fire', color: '#ff9100'}
 }
+//try water 0466c8, 2d00f7
+//try fire e01e37, ffff3f, ff6d00, ff7900, ff8500, ff9100
+
+//classic element colors
+
+// const elements1 = {
+//     water: {name: 'water', color: '#778da9'},
+//     air: {name: 'air', color: '#ecf8f8'},
+//     earth: {name: 'earth', color: '#997b66'},
+//     fire: {name: 'fire', color: '#ffcb69'}
+// }
+
+
+
+
+
 
 
 //make board
