@@ -113,7 +113,14 @@ button:hover {
     /* transition: .4s linear; */
 }
 
-
+#draw-buttons {
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    /* background-color: blue; */
+    padding: 0 2vh;
+}
 
 
 
@@ -154,7 +161,7 @@ button:hover {
     width: 40vh;
     display: flex;
     flex-wrap: wrap;
-    height: 15vh;
+    height: 10vh;
     align-items: center;
     border: 1px solid black;
 }
@@ -255,4 +262,3 @@ button:hover {
       100% { opacity: 1; }
   }
    */
-   
