@@ -411,7 +411,7 @@ const endActionFunction = function(targetSq){
     if(pieceType === 'fire'){fireAction(targetSq);} else
     if(pieceType === 'water'){waterAction(targetSq);} else
     if(pieceType === 'earth'){earthAction(targetSq);} else
-    {airAction(targetSq);}
+    if(pieceType === 'air'){airAction(targetSq);}
     //last is placeholder handler for all unspecified types of pieces
 }
 
@@ -453,7 +453,7 @@ const waterAction = function(targetSq){
             announce('Flow, Water!!');
         }
         else{
-            airAction(targetSq);
+            miscAction(targetSq);
         }
     }
 }
@@ -572,6 +572,10 @@ const earthDrillAction = function(targetSq){
 //should reverse order so check for active piece instead...
 const airAction = function(targetSq){
     console.log('air action');
+    miscAction(targetSq);
+}
+
+const miscAction = function(targetSq){
     if(isEmpty(targetSq)){
         targetSq.append(activePiece);
         activePiece.removeClass('panel-stone');
