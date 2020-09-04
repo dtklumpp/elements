@@ -219,6 +219,10 @@ button:hover {
     /* justify-content: center; */
     text-transform: uppercase;
     border: solid 1px black;
+    /* stack overflow said this will make expand to fit announcements */
+    /* it didn't */
+    /* overflow:hidden; */
+    /* height:1%; */
 }
     
 .emily {

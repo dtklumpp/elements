@@ -41,6 +41,9 @@ let movesLeft;
 let drewStones = false;
 //kind of a hacky variable here
 //what was here??
+//ok this one reallyhacky
+let somebodyWon = false;
+let winner1;
 
 //anyway this one is for animation
 let isAnimate = false;
@@ -253,6 +256,7 @@ const resetActivePiece = function(){
         if(gameEnd){
             winner1 = 3 - (whoseTurn());
             announce('Sage trapped!  Player '+winner1+' is the winner!!!');
+            somebodyWon = true;
         }
         else {
             //console.log('here we are');
@@ -715,7 +719,18 @@ const switchTurns = function() {
     announce('player '+whoseTurn()+' to play!');
     drewStones = false;
     movesLeft = 1;
-    
+
+    //in case you get into a water corner
+    waterFlow = false;
+    waterArray = [];
+    waterIDs = [];
+    midAction = false;
+    waterDrill = false;
+    //just for good measure
+    airDrill = false;
+    earthDrill = false;
+    fireDrill = false;
+    //oh gotta reset active piece...but that function CALLS this one!
 }
 
 //move this all to the top later
@@ -788,6 +803,9 @@ $('#button3').on('click', draw3Stones); //does the same thing but more lines...
 $('#button2').on('click', draw2Stones);
 $('#button1').on('click', draw1Stones);
 
+$('#button8').on('click', function(){drawStones(8);});
+
+
 
 $('#buttonUnselect').on('click', resetActivePiece);
 
@@ -802,7 +820,18 @@ $('#animate').on('click', toggleAnimate);
 const reloadPage = function() {location.reload();}
 $('.reload').on('click', function(){location.reload();});
 
-$('.switch-turns').on('click', switchTurns);
+const switchButton = function() {
+    movesLeft = 0;
+    resetActivePiece();
+}
+$('.switch-turns').on('click', switchButton);
+
+const announceWinner = function(){
+    if(somebodyWon){
+        announce('Player '+winner1+' Wins!!!');
+    }
+}
+$('#announcements').on('click', announceWinner);
 
 //$('#button4').on('click', getAdjacentSquares);
 
