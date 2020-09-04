@@ -331,9 +331,12 @@ const announce = function(announcement1){
     console.log('announce toggler: '+announceToggler);
     if(announceToggler){
         $('#announcements').css('color', 'red');
+        //testing this
+        //$('#announcements').css('background-color', '#f1f1f1');
     }
     else{
         $('#announcements').css('color', '#ffcb69');
+        //$('#announcements').css('background-color', '#415a77');
     }
     $('#announcements').text(announcement1); // set announcement area
     //$('announcements').addClass('flashit');
