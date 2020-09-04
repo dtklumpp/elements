@@ -528,7 +528,7 @@ const sageAction = function(targetSq){
                         {top: '+='+ypix,
                         left: '+='+xpix},
                         interval);
-                    setTimeout(function(){sagePiece.hide();}, interval-1);
+                    setTimeout(function(){sagePiece.hide();}, interval-1); //-1 hides early to avoid ghosting
                     setTimeout(function(){targetSq.append(sagePiece);}, interval);
                     sagePiece.animate(
                         {top: '-='+ypix,
@@ -793,6 +793,9 @@ $('.p'+whoseTurn()).addClass('active')
 $('.sage'+whoseTurn()).addClass('active-sage');
 
 $('#animate').on('click', toggleAnimate);
+
+const reloadPage = function() {location.reload();}
+$('.reload').on('click', function(){location.reload();});
 
 //$('#button4').on('click', getAdjacentSquares);
 

@@ -26,6 +26,10 @@ button:hover {
     filter: brightness(110%);
 }
 
+.reload {
+    margin: 5px;
+}
+
 #play-area {
     display: flex;
     position: relative;
