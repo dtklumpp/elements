@@ -113,6 +113,12 @@ button:hover {
     /* transition: .4s linear; */
 }
 
+/* this doesn't do anything at the moment */
+.water-array {
+    /* background-color: #f1f1f1; */
+    background-color: #0466c8;
+}
+
 #draw-buttons {
     width: 100%;
     display: flex;
@@ -121,6 +127,18 @@ button:hover {
     /* background-color: blue; */
     padding: 0 2vh;
 }
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -270,3 +288,4 @@ button:hover {
       100% { opacity: 1; }
   }
    */
+

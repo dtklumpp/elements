@@ -468,6 +468,7 @@ const waterDrillAction = function(targetSq){
             && !(waterIDs.includes(targetSq.attr('id')))
             ){
                 waterArray.push(targetPiece);
+                targetPiece.css('background-color', '#0466c8');
                 waterTail = targetPiece;
                 resetAdjacentSquares();
                 adjArray = getAdjacentSquares(waterTail);
@@ -480,15 +481,14 @@ const waterDrillAction = function(targetSq){
     }
     if(waterCounter === 0){
         waterFlow = false;
+        resetWaterArray();
         waterArray = [];
+        //console.log('zeroed water array');
         waterIDs = [];
         waterDrill = false;
         midAction = false;
         resetActivePiece();
     }
-
-
-
 //set watertail
 //set watercounters
 //make center square global
@@ -496,8 +496,12 @@ const waterDrillAction = function(targetSq){
 //make sure tail not double back--------------
 }
 
-
-
+const resetWaterArray = function() {
+    //console.log('reset water array');
+    for(eachDrop of waterArray){
+        eachDrop.css('background-color', '#2d00f7');
+    }
+}
 
 
 
@@ -762,7 +766,9 @@ const switchTurns = function() {
 
     //in case you get into a water corner
     waterFlow = false;
+    resetWaterArray();
     waterArray = [];
+    //console.log('zeroed water array');
     waterIDs = [];
     midAction = false;
     waterDrill = false;
