@@ -353,8 +353,8 @@ const clickAction = function(event){
     //console.log(getCoords(targetSq));
     //go back to this if getting weird behavior...
 
-    if(midAction){midActionFunction(targetSq);}
-    else {endActionFunction(targetSq);}
+    if(midAction){midActionFunction(targetSq);} else
+    if(activePiece) {endActionFunction(targetSq);}
 }
 
 const midActionFunction = function(targetSq){
@@ -366,17 +366,15 @@ const midActionFunction = function(targetSq){
 }
 
 const endActionFunction = function(targetSq){
-    if(activePiece){
-        let pieceType = activePiece.attr('piecetype');
-        console.log("active piecetype: ", pieceType);
-        //
-        if(pieceType === 'sage'){sageAction(targetSq);} else 
-        if(pieceType === 'fire'){fireAction(targetSq);} else
-        if(pieceType === 'water'){waterAction(targetSq);} else
-        if(pieceType === 'earth'){earthAction(targetSq);} else
-        {airAction(targetSq);}
-        //last is placeholder handler for all unspecified types of pieces
-    }
+    let pieceType = activePiece.attr('piecetype');
+    console.log("active piecetype: ", pieceType);
+    //
+    if(pieceType === 'sage'){sageAction(targetSq);} else 
+    if(pieceType === 'fire'){fireAction(targetSq);} else
+    if(pieceType === 'water'){waterAction(targetSq);} else
+    if(pieceType === 'earth'){earthAction(targetSq);} else
+    {airAction(targetSq);}
+    //last is placeholder handler for all unspecified types of pieces
 }
 
 

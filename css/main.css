@@ -218,6 +218,7 @@ button:hover {
     text-align: center;
     /* justify-content: center; */
     text-transform: uppercase;
+    border: solid 1px black;
 }
     
 .emily {
