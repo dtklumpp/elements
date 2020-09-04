@@ -193,6 +193,10 @@ button:hover {
     /* background-color: #f1dca7; */
     background-color: #efefd0;
 }
+
+.expand:hover {
+    transform: scale(1.05);
+}
     
     
     /* 

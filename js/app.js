@@ -100,14 +100,15 @@ const startAction = function(event){
         if(!activePiece
             && (isTurn || !pieceOwner)
             ){
-                activePiece = $(event.target);
-                //activePiece.css('background-color', '#f10000')
-
-
-
-
-                activePiece.addClass('selected');
-                //activePiece.css('border', 'solid 2px red');
+                if(!drewStones){
+                    announce('Draw Stones!');
+                }
+                else{
+                    activePiece = $(event.target);
+                    //activePiece.css('background-color', '#f10000')
+                    activePiece.addClass('selected');
+                    //activePiece.css('border', 'solid 2px red');
+                }
             }
     }
 }
