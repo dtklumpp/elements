@@ -187,8 +187,10 @@ const getCoords = function(jqEl){
 }
 
 const getDistance = function(piece1, square1){
-    let x1 = piece1.parent().attr('x-coord');
-    let y1 = piece1.parent().attr('y-coord');
+    let isSquare = piece1.hasClass('square');
+    let x1 = isSquare? piece1.attr('x-coord') : piece1.parent().attr('x-coord');
+    let y1 = isSquare? piece1.attr('y-coord') : piece1.parent().attr('y-coord');
+    //let y1 = piece1.parent().attr('y-coord');  // old fxn
     let x2 = square1.attr('x-coord');
     let y2 = square1.attr('y-coord');
     //console.log("get distance: ", x1, x2, y1, y2);
@@ -266,7 +268,8 @@ const getAdjacentSquares = function(inputPiece){
         let centerPiece = inputPiece;
         //x1 = getCoords(centerPiece).x1;
         //y1 = getCoords(centerPiece).y1;
-        centerID = centerPiece.parent().attr('id');
+        let isSquare = centerPiece.hasClass('square');
+        centerID = isSquare ? centerPiece.attr('id') :centerPiece.parent().attr('id');
         for(eachSquare of allSquares){
             if(getDistance(centerPiece, eachSquare) < 1.5
                     && eachSquare.attr('id') != centerID){
@@ -548,7 +551,7 @@ const sageAction = function(targetSq){
                 if(targetType === 'air'){
                     console.log('air drill');
                     resetAdjacentSquares();
-                    adjArray = getAdjacentSquares(activePiece);
+                    adjArray = getAdjacentSquares(targetSq);
                     highlightAdjacentSquares();
                     airDrill = true;
                     midAction = true;
