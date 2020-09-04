@@ -673,10 +673,13 @@ $('#'+startP1).append(piece1);
 $('#'+startP2).append(piece2);
 
 //this works and is the easiest...
-//piece1.draggable();
+
+const dragButton = function() {
+    piece1.draggable();
+    piece2.draggable();
+}
 
 
-//piece2.draggable();
 /* 
 $(function() {
     $('.sage').draggable();
@@ -847,6 +850,8 @@ const announceWinner = function(){
     }
 }
 $('#announcements').on('click', announceWinner);
+
+$('#drag').on('click', dragButton);
 
 //$('#button4').on('click', getAdjacentSquares);
 
