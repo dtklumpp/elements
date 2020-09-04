@@ -913,6 +913,8 @@ $('#announcements').on('click', announceWinner);
 
 $('#drag').on('click', dragButton);
 
+alert("surround your opponent's Sage to win!");
+
 //$('#button4').on('click', getAdjacentSquares);
 
 
