@@ -224,7 +224,7 @@ const resetActivePiece = function(){
     $('#moves'+whoseTurn()).text(movesLeft);
     //switch turns if out of moves
     if(!movesLeft){
-        $('#hand'+whoseTurn()).empty();
+        //$('#hand'+whoseTurn()).empty(); //i put this in the switch turns function
         switchTurns()
 
         //check for victory
@@ -254,7 +254,8 @@ const resetActivePiece = function(){
         }
         else {
             //console.log('here we are');
-            announce('player '+whoseTurn()+' to play!');
+            //announce('player '+whoseTurn()+' to play!'); //moved to switchturns functions
+            //would switch turns here, but did it already!
         }
         //announce('here we are');
     
@@ -703,12 +704,14 @@ const toggleAnimate = function() {
 
 
 const switchTurns = function() {
+    $('#hand'+whoseTurn()).empty();
     $('#moves'+whoseTurn()).text('');
     $('.p'+whoseTurn()).removeClass('active')
     $('.sage'+whoseTurn()).removeClass('active-sage');
     firstPlayerTurn = !firstPlayerTurn;
     $('.p'+whoseTurn()).addClass('active')
     $('.sage'+whoseTurn()).addClass('active-sage');
+    announce('player '+whoseTurn()+' to play!');
     drewStones = false;
     movesLeft = 1;
     
@@ -797,6 +800,8 @@ $('#animate').on('click', toggleAnimate);
 
 const reloadPage = function() {location.reload();}
 $('.reload').on('click', function(){location.reload();});
+
+$('.switch-turns').on('click', switchTurns);
 
 //$('#button4').on('click', getAdjacentSquares);
 
