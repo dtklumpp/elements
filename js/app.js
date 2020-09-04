@@ -44,6 +44,7 @@ let drewStones = false;
 //ok this one reallyhacky
 let somebodyWon = false;
 let winner1;
+let announceToggler = true;
 
 //anyway this one is for animation
 let isAnimate = false;
@@ -306,7 +307,18 @@ const isEmpty = function(checkSquare){
 }
 
 const announce = function(announcement1){
+    console.log('announce toggler: '+announceToggler);
+    announceToggler = !announceToggler;
+    console.log('announce toggler: '+announceToggler);
+    if(announceToggler){
+        $('#announcements').css('color', 'red');
+    }
+    else{
+        $('#announcements').css('color', '#ffcb69');
+    }
     $('#announcements').text(announcement1); // set announcement area
+    //$('announcements').addClass('flashit');
+    //setTimeout(function(){$('announcements').removeClass('flashit');}, 1000);
 }
 
 //checks if there's a mountain in the way of the Sage
@@ -403,6 +415,7 @@ const waterAction = function(targetSq){
         waterIDs.push(activePiece.parent().attr('id'));
         waterCounter = 1;
         //resetActivePiece();
+        announce('Flow, Water!!');
     }
 }
 
@@ -488,6 +501,7 @@ const earthDrillAction = function(targetSq){
         if(!isEmpty(targetSq)){
             console.log('earth drill action');
             targetSq.empty();
+            announce('Stoned!!!');
         }
         earthDrill = false;
         midAction = false;
@@ -571,6 +585,7 @@ const sageAction = function(targetSq){
             }
             else{
                 console.log('mountain drill');
+                announce("mountain'ed!");
             }
 
 
