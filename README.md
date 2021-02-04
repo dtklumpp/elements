@@ -7,11 +7,11 @@ This is a digital port of a classic abstract board game known by various names, 
 ## Contents
 
   1. [Setup](#Setup)
-  1. [Usage](#Usage)
-  1. [Example of Use](#Example-of-Use)
+  1. [Rules of Play](#Rules-of-Play)
+  1. [Elemental Powers](Elemental-Powers)
+  1. [Game In Progress](#Game-in-Progress)
   1. [Roadmap](#Roadmap)
   1. [Development](#Development)
-  1. [Math](#Math)
   1. [License](#License)
   1. [Notes](#Notes)
 
@@ -34,7 +34,7 @@ $ cd elements
 $ open -a "Google Chrome" index.html
 ```
 
-## Rules of Play
+## Rules-of-Play
 
 1. Draw stones from the "bag" with the orange Draw buttons
 1. Each extra stone is one less move for your pawn
@@ -53,7 +53,7 @@ These powers are applied when placing a stone of one of the four "element" types
 - Earth: The earth forms an impassible mountain; a pawn may not move between two diagonal earth stones.
 - Air: A pawn may "float" or jump across any number of adjacent air stones.
     
-## Example-of-Use
+## Game-in-Progress
 
 - ![elements-game-in-progress](https://user-images.githubusercontent.com/65556316/106966995-5d76b680-6714-11eb-859d-11e5ac9f84ce.png)
 
