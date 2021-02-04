@@ -1,57 +1,94 @@
-# elements
-play the obscure folk game ELEMENTS
+# Elements Board Game
 
-//=====================
+## About  
 
-### USER STORY:
+This is a digital port of a classic abstract board game known by various names, here called Elements.  Two users take turns drawing and placing stones, and moving their pawns around the board.  Different colors of stones have unique effects.  When your opponent's pawn is surrounded, you win!
 
-The Users show up ready to PLAY
+## Contents
 
-They click Start a New Game
+  1. [Setup](#Setup)
+  1. [Usage](#Usage)
+  1. [Example of Use](#Example-of-Use)
+  1. [Roadmap](#Roadmap)
+  1. [Development](#Development)
+  1. [Math](#Math)
+  1. [License](#License)
+  1. [Notes](#Notes)
 
-They place their Kings
+## Requirements
 
-Then each turn:
-* They pick how many king moves they want (minus 1 stone per move)
-* They take all their moves (placing stones and moving King)
-* When a stone is placed, they also get to implement its element bonus, which usually involves creating or moving adjacent stones around on the board.  In some cases a stone can directly replace a different element stone.
-* Can users bid to go first?  I'll try to look this up...
+- None
 
-After each move, the game checks if somebody has won.  This happens if the enemy King has no legal moves.
+## Setup
 
-If so, it implements the Congratulations function and transfers $X to the winning User's swiss bank account (and removes it from the loser's?--stretch goal)
+To clone and run this servce, you'll need [Git](https://git-scm.com) installed on your computer, and a modern browser.  From the command line:
 
-The element powers btw (as i remember them) are:
-* fire spreads in a line (creates new fire stones at end of adjacent lines)
-* water flows away (can move an adjacent water stone?)
-* earth blocks jumping and replacement
-* air lets Kings jump over it
+```bash
+# Clone this repo
+$ git clone https://github.com/dtklumpp/elements
 
-//===================
+# Go into the repository
+$ cd elements
 
-# *MVP:*
-* I want to make a digital version of an old folk game called Elements.
-* It's played with 4 different colors of pebbles (being earth, air, wind, and fire) on a chess board or a little larger.
-* It's a bit of a mix between Chess and Go -- each player has exactly one King that must avoid being captured, and the 4 different element stones have different special things they do when you place them.
-* You draw a "hand" of stones which determines which colors you can play.
-* 2 players: both players are playing from the same computer.
-* highlight whoever's turn it is
-* Just Air powers are for MVP (not fire/water/earth)
-* Implement check for Victory conditions (when opponent King has no legal move)
+# Run the app
+$ open -a "Google Chrome" index.html
+```
 
-//===================
+## Rules of Play
 
-## **BASIC GOALS AND STRETCH GOALS:**
-* The nice thing about this project is i have some flexibility as to how deeply to dive into some of the features.  
+1. Draw stones from the "bag" with the orange Draw buttons
+1. Each extra stone is one less move for your pawn
+1. Take turns placing your stones and moving your pawn until you're out of moves
+1. Now it is your opponent's turn to play
+1. Each time a stone is placed, its "Elemental Powers" are activated ([see below](#Elemental-Powers))
+1. When one pawn is surrounded with no moves to take, that player forfeits the match
+1. Reset the match with the "New Game" button
 
-* My basic MVP will create a Board, let the user place their King, draw Stones from the Bag, move their King around, and Place the stones on the board, with some simplified movement properties.  It will also identify when somebody's King is surrounded, thus Winning the game for their opponent.
+## Elemental-Powers
 
-* From there I want to implement as many cool CSS/jQuery things as I can, as I really want to play around with and get better at various ways to make things pop and transitioon and look good on the page.
+These powers are applied when placing a stone of one of the four "element" types: air, earth, fire, and water.
 
-* And as stretch goals I can implement the more advanced rules for Element Stone movement / powers, plus more advanced CSS stuff if i get to it.
+- Fire: The fire spreads across the board: you may place an additional adjacent fire stone from the bag.
+- Water: The river of water flows: you may "flow" the river 7 spaces around the board.
+- Earth: The earth forms an impassible mountain; a pawn may not move between two diagonal earth stones.
+- Air: A pawn may "float" or jump across any number of adjacent air stones.
+    
+## Example-of-Use
 
-* Fire & Water & Earth powers are stretch goals
+- ![elements-game-in-progress](https://user-images.githubusercontent.com/65556316/106966995-5d76b680-6714-11eb-859d-11e5ac9f84ce.png)
 
-* Stretch stretch stretch goal: play with someone over the internet!!
+## Roadmap -- pending features
+
+- allow pawn movement through drag-and-drop
+- flesh out pawn animation
+- allow variable board size
+- incorporate advanced rules for water and fire
+- highlight legal moves in real-time
+- add 3D appearance to stones
+- add figurine images for pawns
+- translate rulebook from Italian
+- fix wall-of-water bug
+- allow asyncronous play
+- incorporate account metrics / leaderboard
+
+## Development
+Help me improve the game!
+
+To help with a bug or add functionality, do this:
+
+- Fork this repo
+- Make a branch (`git checkout -b new-feature`)
+- Make modifications where necessary
+- Add comments corresponding to your changes
+- Commit (`git commit -m 'explanation'`)
+- Push up (`git push origin new-feature`)
+- Make a Pull Request 
 
 
+## License
+
+MIT ©
+
+
+## Notes
+This is one of my first digital board game ports.  I'd encourage you to check out a fine wood-and-cardboard version of this old classic from Dashing Games viewable at BGG [here](https://boardgamegeek.com/boardgame/216403/element).  Note some slight rule differences.
