@@ -1,7 +1,5 @@
 # Elements Board Game
 
-## About  
-
 This is a digital port of a classic abstract board game known by various names, here called Elements.  Two users take turns drawing and placing stones, and moving their pawns around the board.  Different colors of stones have unique effects.  When your opponent's pawn is surrounded, you win!
 
 ## Contents
