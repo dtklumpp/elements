@@ -2,6 +2,8 @@
 
 This is a digital port of a classic abstract board game known by various names, here called Elements.  Two users take turns drawing and placing stones, and moving their pawns around the board.  Different colors of stones have unique effects.  When your opponent's pawn is surrounded, you win!
 
+I've designed this with sort of a muted earth-tone palette to represent the elements abstractly, rather than trying to make stones that really look like water, fire, etc, as in the cardboard version.  You can drag-and-drop the stones or have them slide across, and toggle on or off animation.
+
 ## Contents
 
   1. [Setup](#Setup)
