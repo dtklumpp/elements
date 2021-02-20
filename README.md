@@ -4,12 +4,16 @@ This is a digital port of a classic abstract board game known by various names, 
 
 I've designed this with sort of a muted earth-tone palette to represent the elements abstractly, rather than trying to make stones that really look like water, fire, etc, as in the cardboard version.  You can drag-and-drop the stones or have them slide across, and toggle on or off animation.
 
+## game-in-progress
+
+- ![elements-game-in-progress](https://user-images.githubusercontent.com/65556316/106966995-5d76b680-6714-11eb-859d-11e5ac9f84ce.png)
+
+
 ## Contents
 
   1. [Setup](#Setup)
   1. [Rules of Play](#Rules-of-Play)
   1. [Elemental Powers](Elemental-Powers)
-  1. [Game In Progress](#Game-in-Progress)
   1. [Roadmap](#Roadmap)
   1. [Development](#Development)
   1. [License](#License)
@@ -49,9 +53,6 @@ These powers are applied when placing a stone of one of the four "element" types
 - Earth: The earth forms an impassible mountain; a pawn may not move between two diagonal earth stones.
 - Air: A pawn may "float" or jump across any number of adjacent air stones.
     
-## Game-in-Progress
-
-- ![elements-game-in-progress](https://user-images.githubusercontent.com/65556316/106966995-5d76b680-6714-11eb-859d-11e5ac9f84ce.png)
 
 ## Roadmap -- pending features
 
